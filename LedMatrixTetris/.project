@@ -34,22 +34,22 @@
 		<link>
 			<name>core/core</name>
 			<type>2</type>
-			<location>/home/toyos/bin/eclipse-arduino2/arduinoPlugin/packages/arduino/hardware/avr/1.6.13/cores/arduino</location>
+			<location>/home/toyos/bin/eclipse-arduino/arduinoPlugin/packages/arduino/hardware/avr/1.6.13/cores/arduino</location>
 		</link>
 		<link>
 			<name>core/variant</name>
 			<type>2</type>
-			<location>/home/toyos2/bin/eclipse-arduino2/arduinoPlugin/packages/arduino/hardware/avr/1.6.13/variants/mega</location>
+			<location>/home/toyos/bin/eclipse-arduino/arduinoPlugin/packages/arduino/hardware/avr/1.6.13/variants/mega</location>
 		</link>
 		<link>
 			<name>libraries/Adafruit_GFX</name>
 			<type>2</type>
-			<location>/home/toyos2/Arduino/libraries/Adafruit_GFX</location>
+			<location>/home/toyos/Arduino/libraries/Adafruit_GFX</location>
 		</link>
 		<link>
 			<name>libraries/RGBmatrixPanel</name>
 			<type>2</type>
-			<location>/home/toyos2/Arduino/libraries/RGBmatrixPanel</location>
+			<location>/home/toyos/Arduino/libraries/RGBmatrixPanel</location>
 		</link>
 	</linkedResources>
 </projectDescription>
