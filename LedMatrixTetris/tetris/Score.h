@@ -17,8 +17,11 @@ public:
 	virtual ~Score();
 
 	void loop();
+	uint16_t getPoints() const;
+	void setPoints(uint16_t points);
+	void addPoints(uint16_t points) ;
 private:
-	uint8_t points;
+	uint16_t points;
 	TetrisGame* game;
 
 	void drawScore();
