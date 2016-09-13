@@ -17,6 +17,7 @@ TetrisGame::TetrisGame() {
 			MATRIX_OE,
 			true);
 
+	this->board = new Board(this);
 	black = matrix->Color444(0, 0, 0);
 	yellow = matrix->Color444(15, 15, 0);
 	darkyellow = matrix->Color444(1, 1, 0);
@@ -31,6 +32,15 @@ TetrisGame::TetrisGame() {
 	green = matrix->Color444(0, 15, 0);
 	grey =  matrix->Color444(1, 1, 1);
 	magenta =  matrix->Color888(229, 9, 127);
+	matrixColor[0]=black;
+	matrixColor[1]=cyan;
+	matrixColor[2]=blue;
+	matrixColor[3]=orange;
+	matrixColor[4]=yellow;
+	matrixColor[5]=green;
+	matrixColor[6]=magenta;
+	matrixColor[7]=red;
+
 	matrix->begin();
 	score=new Score(this);
 }
@@ -42,7 +52,8 @@ TetrisGame::~TetrisGame() {
 void TetrisGame::loop() {
 	//matrix->drawPixel(0, 0, matrix->Color888(255, 255, 255));
 	score->loop();
-	matrix->swapBuffers(false);
+	board->loop();
+	matrix->swapBuffers(true);
 }
 
 const uint8_t PROGMEM TetrisGame::digit_bitmaps[] = {
@@ -121,6 +132,14 @@ const uint8_t PROGMEM TetrisGame::digit_bitmaps[] = {
 
 const uint8_t* TetrisGame::getDigitBitmap(uint8_t digit) {
 	return this->digit_bitmaps + digit*7;
+}
+
+Board*& TetrisGame::getBoard()  {
+	return board;
+}
+
+Score*& TetrisGame::getScore()  {
+	return score;
 }
 
 uint8_t TetrisGame::drawBitmap(int x, int y, const uint8_t *bmp, uint16_t color) {
