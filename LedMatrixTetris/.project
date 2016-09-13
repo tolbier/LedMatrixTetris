@@ -31,6 +31,25 @@
 		<nature>it.baeyens.arduinonature</nature>
 	</natures>
 	<linkedResources>
-		
+		<link>
+			<name>core/core</name>
+			<type>2</type>
+			<location>/home/toyos/bin/eclipse-arduino/arduinoPlugin/packages/arduino/hardware/avr/1.6.13/cores/arduino</location>
+		</link>
+		<link>
+			<name>core/variant</name>
+			<type>2</type>
+			<location>/home/toyos/bin/eclipse-arduino/arduinoPlugin/packages/arduino/hardware/avr/1.6.13/variants/mega</location>
+		</link>
+		<link>
+			<name>libraries/Adafruit_GFX</name>
+			<type>2</type>
+			<location>/home/toyos/Arduino/libraries/Adafruit_GFX</location>
+		</link>
+		<link>
+			<name>libraries/RGBmatrixPanel</name>
+			<type>2</type>
+			<location>/home/toyos/Arduino/libraries/RGBmatrixPanel</location>
+		</link>
 	</linkedResources>
 </projectDescription>
