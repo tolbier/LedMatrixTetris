@@ -17,7 +17,20 @@ TetrisGame::TetrisGame() {
 			MATRIX_OE,
 			true);
 
-
+	black = matrix->Color444(0, 0, 0);
+	yellow = matrix->Color444(15, 15, 0);
+	darkyellow = matrix->Color444(1, 1, 0);
+	red = matrix->Color444(15, 0, 0);
+	white = matrix->Color444(15, 15, 15);
+	pink = matrix->Color444(15, 3, 15);
+	palePink = matrix->Color444(15, 8, 15);
+	blue = matrix->Color444(0, 0, 10);
+	cyan = matrix->Color444(0, 15, 15);
+	orange = matrix->Color444(15, 5, 0);
+	darkOrange = matrix->Color444(15, 1, 0);
+	green = matrix->Color444(0, 15, 0);
+	grey =  matrix->Color444(1, 1, 1);
+	magenta =  matrix->Color888(229, 9, 127);
 	matrix->begin();
 	score=new Score(this);
 }

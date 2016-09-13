@@ -29,6 +29,7 @@ public:
 	RGBmatrixPanel* matrix;
 	const uint8_t* getDigitBitmap(uint8_t digit);
 	uint8_t drawBitmap(int x, int y, const uint8_t *bmp, uint16_t color) ;
+	uint16_t black , yellow , darkyellow , red , white , pink ,palePink , blue , cyan ,orange ,darkOrange ,green ,grey,magenta;
 private:
 	Score* score;
 	static const uint8_t PROGMEM digit_bitmaps[] ;

@@ -28,13 +28,13 @@ void Score::loop() {
 }
 
 void Score::drawScore() {
-	game->matrix->fillRect(0,0,5,16,game->matrix->Color888(0,0,0));
+	game->matrix->fillRect(0,0,5,16,game->black);
 	uint16_t divisor=1000;
 
 	for (int i=0;i<4;i++){
 
 		uint8_t digit = (getPoints()/divisor)%10;
-		game->drawBitmap(4*i,0,  game->getDigitBitmap(digit), game->matrix->Color888(0, 255, 0));
+		game->drawBitmap(4*i,0,  game->getDigitBitmap(digit), game->green);
 		divisor=divisor /10;
 	}
 }
