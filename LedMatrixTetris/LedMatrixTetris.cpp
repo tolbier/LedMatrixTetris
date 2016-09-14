@@ -6,6 +6,7 @@ TetrisGame* game;
 
 void setup()
 {
+	Serial.begin(9600);
 	game= new TetrisGame();
 
 }

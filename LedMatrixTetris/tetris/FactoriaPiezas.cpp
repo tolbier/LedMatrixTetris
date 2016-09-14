@@ -10,6 +10,7 @@
 FactoriaPiezas::FactoriaPiezas(TetrisGame* game) {
 	this->game=game;
 
+
 }
 
 FactoriaPiezas::~FactoriaPiezas() {
@@ -17,12 +18,23 @@ FactoriaPiezas::~FactoriaPiezas() {
 }
 
 Pieza* FactoriaPiezas::createPieza() {
-	return new Pieza((Environment::Color)1);
+	return new Pieza(3,this);
 }
+const uint8_t* FactoriaPiezas::profiles_data[]={
+		pieza_bitmaps,
+		pieza_bitmaps+11,
+		pieza_bitmaps+31,
+		pieza_bitmaps+51,
+		pieza_bitmaps+57,
+		pieza_bitmaps+68,
+		pieza_bitmaps+79
+
+
+};
 
 const uint8_t PROGMEM FactoriaPiezas::pieza_bitmaps[] = {
 
-	0,
+	1,
 	2,
 	1,4,
 	0b10000000,
@@ -32,68 +44,89 @@ const uint8_t PROGMEM FactoriaPiezas::pieza_bitmaps[] = {
 	4,1,
 	0b11110000,
 
-	//1
-	3,5,
-	0b01000000,
-	0b01000000,
-	0b01000000,
-	0b01000000,
-	0b01000000,
-	//2
-	3,5,
-	0b11100000,
-	0b00100000,
-	0b11100000,
+	2,
+	4,
+	3,2,
 	0b10000000,
 	0b11100000,
-	//3
-	3,5,
-	0b11100000,
-	0b00100000,
-	0b11100000,
-	0b00100000,
-	0b11100000,
-	//4
-	3,5,
-	0b10100000,
-	0b10100000,
-	0b11100000,
-	0b00100000,
-	0b00100000,
-	//5
-	3,5,
-	0b11100000,
+	2,3,
+	0b11000000,
 	0b10000000,
-	0b11100000,
-	0b00100000,
-	0b11100000,
-	//6
-	3,5,
-	0b11100000,
 	0b10000000,
-	0b11100000,
-	0b10100000,
-	0b11100000,
-	//7
-	3,5,
+	3,2,
 	0b11100000,
 	0b00100000,
-	0b00100000,
-	0b00100000,
-	0b00100000,
-	//8
-	3,5,
-	0b11100000,
-	0b10100000,
-	0b11100000,
-	0b10100000,
-	0b11100000,
-	//9
-	3,5,
-	0b11100000,
-	0b10100000,
-	0b11100000,
-	0b00100000,
-	0b00100000
+	2,3,
+	0b01000000,
+	0b01000000,
+	0b11000000,
 
-	};
+	3,
+	4,
+	3,2,
+	0b00100000,
+	0b11100000,
+	2,3,
+	0b10000000,
+	0b10000000,
+	0b11000000,
+	3,2,
+	0b11100000,
+	0b10000000,
+	2,3,
+	0b11000000,
+	0b01000000,
+	0b01000000,
+
+	4,
+	1,
+	2,2,
+	0b11000000,
+	0b11000000,
+
+	5,
+	2,
+	3,2,
+	0b01100000,
+	0b11000000,
+	2,3,
+	0b10000000,
+	0b11000000,
+	0b01000000,
+
+	6,
+	2,
+	3,2,
+	0b11000000,
+	0b01100000,
+	2,3,
+	0b01000000,
+	0b11000000,
+	0b10000000,
+
+	7,
+	4,
+	3,2,
+	0b01000000,
+	0b11100000,
+	2,3,
+	0b10000000,
+	0b11000000,
+	0b10000000,
+	3,2,
+	0b11100000,
+	0b01000000,
+	2,3,
+	0b01000000,
+	0b11000000,
+	0b01000000
+
+};
+
+const uint8_t* FactoriaPiezas::getProfile(int tipoPieza) const {
+	return this->profiles_data[tipoPieza-1];
+}
+
+TetrisGame*& FactoriaPiezas::getGame()  {
+	return game;
+}

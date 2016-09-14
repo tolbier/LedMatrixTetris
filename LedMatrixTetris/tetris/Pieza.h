@@ -9,20 +9,31 @@
 #define TETRIS_PIEZA_H_
 #include "Arduino.h"
 #include "Environment.h"
+#include "FactoriaPiezas.h"
 class Environment;
+
+class FactoriaPiezas;
 
 class Pieza {
 public:
-	Pieza(Environment::Color color);
+	Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas );
 	virtual ~Pieza();
 	uint8_t getX() const;
 	void setX(uint8_t x);
 	uint8_t getY() const;
 	void setY(uint8_t y);
-
+	uint8_t getNumProfiles() const;
+	void loop();
+	void drawPieza();
+	const uint8_t* getCurrentProfile();
 private:
 	uint8_t x,y;
 	Environment::Color color;
+	FactoriaPiezas* factoriaPiezas;
+	const uint8_t* profiles[4] ;
+	uint8_t numProfiles;
+	uint8_t currentProfileIdx;
+
 };
 
 #endif /* TETRIS_PIEZA_H_ */

@@ -27,6 +27,7 @@ class Score;
 class Board;
 class FactoriaPiezas;
 class RGBmatrixPanel;
+class Pieza;
 
 class TetrisGame {
 public:

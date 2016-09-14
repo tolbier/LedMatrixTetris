@@ -54,6 +54,7 @@ TetrisGame::~TetrisGame() {
 void TetrisGame::loop() {
 	if (!pieza) pieza = factoriaPiezas->createPieza();
 	score->loop();
+	pieza->loop();
 	board->loop();
 	matrix->swapBuffers(true);
 }
