@@ -11,6 +11,8 @@
 #include <Adafruit_GFX.h>   // Core graphics library
 #include <RGBmatrixPanel.h> // Hardware-specific library
 #include "Environment.h"
+#include "FactoriaPiezas.h"
+#include "Pieza.h"
 #include "Score.h"
 #include "Board.h"
 
@@ -23,6 +25,7 @@
 
 class Score;
 class Board;
+class FactoriaPiezas;
 class TetrisGame {
 public:
 	TetrisGame();
@@ -38,6 +41,8 @@ public:
 private:
 	Score* score;
 	Board* board;
+	FactoriaPiezas* factoriaPiezas;
+	Pieza* pieza;
 	static const uint8_t PROGMEM digit_bitmaps[] ;
 
 };
