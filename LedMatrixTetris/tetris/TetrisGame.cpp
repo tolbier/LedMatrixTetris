@@ -32,6 +32,7 @@ TetrisGame::TetrisGame() {
 	green = matrix->Color444(0, 15, 0);
 	grey =  matrix->Color444(1, 1, 1);
 	magenta =  matrix->Color888(229, 9, 127);
+
 	matrixColor[0]=black;
 	matrixColor[1]=cyan;
 	matrixColor[2]=blue;
@@ -40,7 +41,8 @@ TetrisGame::TetrisGame() {
 	matrixColor[5]=green;
 	matrixColor[6]=magenta;
 	matrixColor[7]=red;
-
+	this->factoriaPiezas= new FactoriaPiezas(this);
+	pieza=NULL;
 	matrix->begin();
 	score=new Score(this);
 }
@@ -50,7 +52,7 @@ TetrisGame::~TetrisGame() {
 }
 
 void TetrisGame::loop() {
-	//matrix->drawPixel(0, 0, matrix->Color888(255, 255, 255));
+	if (!pieza) pieza = factoriaPiezas->createPieza();
 	score->loop();
 	board->loop();
 	matrix->swapBuffers(true);
@@ -95,7 +97,7 @@ const uint8_t PROGMEM TetrisGame::digit_bitmaps[] = {
 	//5
 	3,5,
 	0b11100000,
-	0b10100000,
+	0b10000000,
 	0b11100000,
 	0b00100000,
 	0b11100000,
@@ -157,7 +159,7 @@ uint8_t TetrisGame::drawBitmap(int x, int y, const uint8_t *bmp, uint16_t color)
 				bit = 7;
 			}
 			if ((b >> bit) & 0x1) {
-				matrix->drawPixel(y + j, 15-x - i, color);
+				matrix->drawPixel(y + j, this->matrix->height()-1-x - i, color);
 			}
 			bit--;
 		}
