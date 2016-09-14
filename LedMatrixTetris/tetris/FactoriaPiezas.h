@@ -16,9 +16,10 @@ public:
 	FactoriaPiezas(TetrisGame* game);
 	virtual ~FactoriaPiezas();
 	Pieza* createPieza();
+
 private:
 	TetrisGame* game;
-
+	static const uint8_t PROGMEM pieza_bitmaps[] ;
 };
 
 #endif /* TETRIS_FACTORIAPIEZAS_H_ */

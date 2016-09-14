@@ -97,7 +97,7 @@ const uint8_t PROGMEM TetrisGame::digit_bitmaps[] = {
 	//5
 	3,5,
 	0b11100000,
-	0b10100000,
+	0b10000000,
 	0b11100000,
 	0b00100000,
 	0b11100000,
