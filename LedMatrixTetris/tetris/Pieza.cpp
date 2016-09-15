@@ -83,10 +83,9 @@ void Pieza::drawPieza() {
 
 	for (uint8_t j = 0; j < height; j++) {
 		bit = 7;
+		b = pgm_read_byte(p++);
 		for (uint8_t i = 0; i < width; i++) {
-			b = pgm_read_byte(p++);
 			if ((b >> bit) & 0x1) {
-
 				this->factoriaPiezas->getGame()->matrix->drawPixel(
 				BOARD_TOP +  (j+y),
 				BOARD_LEFT - (i+x), color);
