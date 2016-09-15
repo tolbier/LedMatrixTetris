@@ -17,7 +17,7 @@ TetrisGame::TetrisGame() {
 			MATRIX_OE,
 			true);
 
-	this->board = new Board(this);
+
 	black = matrix->Color444(0, 0, 0);
 	yellow = matrix->Color444(15, 15, 0);
 	darkyellow = matrix->Color444(1, 1, 0);
@@ -41,6 +41,7 @@ TetrisGame::TetrisGame() {
 	matrixColor[5]=green;
 	matrixColor[6]=magenta;
 	matrixColor[7]=red;
+	this->board = new Board(this);
 	this->factoriaPiezas= new FactoriaPiezas(this);
 	pieza=NULL;
 	matrix->begin();
