@@ -14,7 +14,7 @@
 #define BOARD_WIDTH 10
 #define BOARD_HEIGHT 20
 #define BOARD_TOP 11
-#define BOARD_LEFT 14
+#define BOARD_LEFT 1
 
 class TetrisGame;
 
@@ -25,6 +25,9 @@ public:
 	virtual ~Board();
 	uint8_t width();
 	uint8_t height();
+	uint8_t top();
+	uint8_t left();
+
 	void drawBoard();
 	void loop();
 	Environment::Color getBoardColor(uint8_t x, uint8_t y);

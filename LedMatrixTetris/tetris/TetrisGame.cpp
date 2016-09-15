@@ -18,20 +18,16 @@ TetrisGame::TetrisGame() {
 			true);
 
 
-	black = matrix->Color444(0, 0, 0);
-	yellow = matrix->Color444(15, 15, 0);
-	darkyellow = matrix->Color444(1, 1, 0);
-	red = matrix->Color444(15, 0, 0);
-	white = matrix->Color444(15, 15, 15);
-	pink = matrix->Color444(15, 3, 15);
-	palePink = matrix->Color444(15, 8, 15);
-	blue = matrix->Color444(0, 0, 10);
-	cyan = matrix->Color444(0, 15, 15);
-	orange = matrix->Color444(15, 5, 0);
-	darkOrange = matrix->Color444(15, 1, 0);
-	green = matrix->Color444(0, 15, 0);
-	grey =  matrix->Color444(1, 1, 1);
-	magenta =  matrix->Color888(229, 9, 127);
+	black = color444(0, 0, 0);
+	yellow = color444(15, 15, 0);
+	red = color444(15, 0, 0);
+	white = color444(15, 15, 15);
+	blue = color444(0, 0, 10);
+	cyan = color444(0, 15, 15);
+	orange = color444(15, 5, 0);
+	green = color444(0, 15, 0);
+	grey =  color444(1, 1, 1);
+	magenta =  color888(229, 9, 127);
 
 	matrixColor[0]=black;
 	matrixColor[1]=cyan;
@@ -41,6 +37,9 @@ TetrisGame::TetrisGame() {
 	matrixColor[5]=green;
 	matrixColor[6]=magenta;
 	matrixColor[7]=red;
+	matrixColor[8]=grey;
+	matrixColor[9]=white;
+
 	this->board = new Board(this);
 	this->factoriaPiezas= new FactoriaPiezas(this);
 	pieza=NULL;
@@ -147,7 +146,7 @@ Score*& TetrisGame::getScore()  {
 	return score;
 }
 
-uint8_t TetrisGame::drawBitmap(int x, int y, const uint8_t *bmp, uint16_t color) {
+uint8_t TetrisGame::drawBitmap(int x, int y, const uint8_t *bmp, Environment::Color color) {
 	uint8_t width = pgm_read_byte(bmp);
 	uint8_t height = pgm_read_byte(bmp + 1);
 	const unsigned char *p = bmp + 2;
@@ -162,10 +161,30 @@ uint8_t TetrisGame::drawBitmap(int x, int y, const uint8_t *bmp, uint16_t color)
 				bit = 7;
 			}
 			if ((b >> bit) & 0x1) {
-				matrix->drawPixel(y + j, this->matrix->height()-1-x - i, color);
+				drawPixel(x+i, y + j, getMatrixColor(color));
 			}
 			bit--;
 		}
 	}
 	return width;
+}
+void TetrisGame::drawPixel(int x, int y,  uint16_t color){
+	this->matrix->drawPixel(y, matrix->height()-1-x,color);
+}
+
+uint16_t TetrisGame::color888(uint8_t r, uint8_t g, uint8_t b) {
+	return this->matrix->Color888(r,g,b);
+}
+
+uint16_t TetrisGame::color444(uint8_t r, uint8_t g, uint8_t b) {
+	return this->matrix->Color444(r,g,b);
+}
+
+void TetrisGame::fillRect(int16_t x, int16_t y, int16_t w, int16_t h,Environment::Color color) {
+	matrix->fillRect( x,  y,  w,  h,
+			getMatrixColor( color));
+}
+
+const uint16_t TetrisGame::getMatrixColor(Environment::Color color ) const {
+	return matrixColor[color] ;
 }

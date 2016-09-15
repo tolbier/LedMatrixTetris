@@ -18,7 +18,7 @@ FactoriaPiezas::~FactoriaPiezas() {
 }
 
 Pieza* FactoriaPiezas::createPieza() {
-	return new Pieza(3,this);
+	return new Pieza(1,this);
 }
 const uint8_t* FactoriaPiezas::profiles_data[]={
 		pieza_bitmaps,

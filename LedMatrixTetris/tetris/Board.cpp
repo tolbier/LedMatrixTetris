@@ -16,7 +16,7 @@ Board::Board(TetrisGame* game) {
 		}
 
 	}
-	game->matrix->fillRect(10,4,22,12,game->grey);
+	game->fillRect(10,4,22,12,Environment::Color::grey);
 }
 
 Board::~Board() {
@@ -38,14 +38,22 @@ void Board::drawBoard() {
 	for (int i=0;i<height();i++){
 		for (int j=0;j<width();j++){
 
-			this->game->matrix->drawPixel(
+			this->game->drawPixel(
+					BOARD_LEFT + j,
 					BOARD_TOP + i,
-					BOARD_LEFT - j,
-					game->matrixColor[getBoardColor(j,i)]);
+					game->getMatrixColor(getBoardColor(j,i)));
 		}
 
 	}
 
+}
+
+uint8_t Board::top() {
+	return BOARD_TOP;
+}
+
+uint8_t Board::left() {
+	return BOARD_LEFT;
 }
 
 Environment::Color Board::getBoardColor(uint8_t x, uint8_t y) {

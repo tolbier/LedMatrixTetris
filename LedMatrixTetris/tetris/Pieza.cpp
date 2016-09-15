@@ -9,13 +9,15 @@
 
 
 Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
-	x = 0;
-	y = 0;
 	this->factoriaPiezas = factoriaPiezas;
+	Board* board=getBoard();
+	x = board->width()/2 - board->left();
+	y = 0;
+
 
 	const uint8_t* p= factoriaPiezas->getProfile(tipoPieza);
 
-	this->color = (Environment::Color)pgm_read_byte(p++);
+	this->color = (Environment::Color)pgm_read_byte(p++) ;
 	Serial.print("color:");
 	Serial.println(color);
 
@@ -25,6 +27,9 @@ Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
 
 	for (int i=0;i<getNumProfiles();i++){
 		profiles[i]=p++;
+		Serial.print("profiles[i]");
+		Serial.println(*(profiles[i]));
+
 		uint8_t  heightProfile =pgm_read_byte(p++);
 		Serial.print("heightProfile:");
 		Serial.println(heightProfile);
@@ -59,42 +64,49 @@ uint8_t Pieza::getNumProfiles() const {
 }
 
 void Pieza::loop() {
+	this->gravedad();
 	this->drawPieza();
 
 
 }
 
 void Pieza::drawPieza() {
-	//uint8_t TetrisGame::drawBitmap(int x, int y, const uint8_t *bmp, uint16_t color) {
 	const uint8_t* p = this->getCurrentProfile();
-
-//	Serial.println("drawPieza");
-//	Serial.print("color:");
-//	Serial.println(color);
-	uint8_t width = pgm_read_byte(p++);
-	uint8_t height = pgm_read_byte(p++);
-//	Serial.print("width:");
-//	Serial.println(width);
-//	Serial.print("height:");
-//	Serial.println(height);
-
-	uint8_t b;
-	uint8_t bit;
-
-	for (uint8_t j = 0; j < height; j++) {
-		bit = 7;
-		b = pgm_read_byte(p++);
-		for (uint8_t i = 0; i < width; i++) {
-			if ((b >> bit) & 0x1) {
-				this->factoriaPiezas->getGame()->matrix->drawPixel(
-				BOARD_TOP +  (j+y),
-				BOARD_LEFT - (i+x), color);
-			}
-			bit--;
-		}
-	}
+	this->factoriaPiezas->getGame()->drawBitmap( BOARD_LEFT+x,  BOARD_TOP+y, p,  color) ;
 }
 
 const uint8_t* Pieza::getCurrentProfile() {
 	return this->profiles[this->currentProfileIdx];
+}
+
+Board* Pieza::getBoard() {
+	return getGame()->getBoard();
+}
+TetrisGame* Pieza::getGame() {
+	return getFactoriaPiezas()->getGame();
+}
+ FactoriaPiezas*& Pieza::getFactoriaPiezas()  {
+	return factoriaPiezas;
+}
+bool Pieza::libreDebajo(){
+	Serial.print("Pieza:height()");
+	Serial.println(height());
+	return (y+height() <this->getBoard()->height());
+
+}
+
+uint8_t Pieza::height(){
+	const uint8_t* p = getCurrentProfile();
+
+	return *(p+1);
+}
+uint8_t Pieza::width(){
+	return getCurrentProfile()[0];
+}
+void Pieza::gravedad() {
+	static unsigned long lastMillis =0;
+	if (millis()-lastMillis<250) return;
+
+	if (libreDebajo()) y++;
+	lastMillis = millis();
 }

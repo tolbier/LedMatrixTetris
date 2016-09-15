@@ -13,7 +13,7 @@ class Environment {
 public:
 	Environment();
 	virtual ~Environment();
-	enum  Color {black,cyan,blue,orange,yellow,green,magenta,red};
+	enum  Color {black,cyan,blue,orange,yellow,green,magenta,red,grey,white};
 };
 
 #endif /* TETRIS_ENVIRONMENT_H_ */

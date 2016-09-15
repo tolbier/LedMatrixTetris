@@ -13,7 +13,8 @@
 class Environment;
 
 class FactoriaPiezas;
-
+class TetrisGame;
+class Board;
 class Pieza {
 public:
 	Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas );
@@ -26,6 +27,14 @@ public:
 	void loop();
 	void drawPieza();
 	const uint8_t* getCurrentProfile();
+	Board* getBoard();
+	FactoriaPiezas*& getFactoriaPiezas() ;
+	TetrisGame* getGame();
+	void gravedad();
+	bool libreDebajo();
+	uint8_t height();
+	uint8_t width();
+
 private:
 	uint8_t x,y;
 	Environment::Color color;
