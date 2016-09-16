@@ -7,7 +7,7 @@
 
 #ifndef TETRIS_FACTORIAPIEZAS_H_
 #define TETRIS_FACTORIAPIEZAS_H_
-
+#include "Arduino.h"
 #include "Pieza.h"
 #include "TetrisGame.h"
 class TetrisGame;

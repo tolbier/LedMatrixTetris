@@ -6,6 +6,7 @@ TetrisGame* game;
 
 void setup()
 {
+	randomSeed(analogRead(0));
 	Serial.begin(9600);
 	game= new TetrisGame();
 

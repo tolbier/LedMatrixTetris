@@ -22,7 +22,7 @@ Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
 	for (int i=0;i<getNumProfiles();i++){
 		profiles[i]=p++;
 		uint8_t  heightProfile =pgm_read_byte(p++);
-		for (uint8_t j=0;j<heightProfile;j++) p++;
+		p+= heightProfile;
 	}
 
 	currentProfileIdx=0;
@@ -87,7 +87,8 @@ void Pieza::stampPieza(){
  	uint8_t width = pgm_read_byte(p++);
  	uint8_t height = pgm_read_byte(p++);
 
- 	uint8_t b;
+
+    uint8_t b;
  	uint8_t bit;
 
  	for (uint8_t j = 0; j < height; j++) {
@@ -154,7 +155,7 @@ uint8_t Pieza::width(){
 }
 void Pieza::gravedad() {
 	static unsigned long lastMillis =0;
-	if (millis()-lastMillis<250) return;
+	if (millis()-lastMillis<50) return;
 
 	if (libreDebajo()){
 		y++;

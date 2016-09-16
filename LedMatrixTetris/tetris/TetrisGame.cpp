@@ -40,7 +40,7 @@ TetrisGame::~TetrisGame() {
 }
 
 void TetrisGame::loop() {
-	if (!pieza) pieza = factoriaPiezas->createPieza();
+	if (pieza==NULL) pieza = factoriaPiezas->createPieza();
 	score->loop();
 
 	board->loop();

@@ -18,7 +18,9 @@ FactoriaPiezas::~FactoriaPiezas() {
 }
 
 Pieza* FactoriaPiezas::createPieza() {
-	return new Pieza(Environment::Color::blue,this);
+	//return new Pieza(random(Environment::Color::red +1),this);
+	Pieza* pieza= new Pieza(random(Environment::Color::red)+1,this);
+	return pieza;
 }
 const uint8_t* FactoriaPiezas::profiles_data[]={
 		pieza_bitmaps,
