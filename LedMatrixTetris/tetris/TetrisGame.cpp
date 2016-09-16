@@ -33,18 +33,26 @@ TetrisGame::TetrisGame() {
 	pieza=NULL;
 
 	score=new Score(this);
+	nextPieza = factoriaPiezas->createPieza();
+
 }
 
 TetrisGame::~TetrisGame() {
-	// TODO Auto-generated destructor stub
+
 }
 
 void TetrisGame::loop() {
-	if (!pieza) pieza = factoriaPiezas->createPieza();
+	if (!pieza){
+		//TODO refactorizar esté código
+		pieza = nextPieza;
+		pieza->setPrevia(false);
+		nextPieza = factoriaPiezas->createPieza();
+	}
 	score->loop();
 
 	board->loop();
 	pieza->loop();
+	nextPieza->loop();
 	if (pieza->isParada()){
 		delete pieza;
 		pieza=NULL;
@@ -173,7 +181,7 @@ uint16_t TetrisGame::color444(uint8_t r, uint8_t g, uint8_t b) {
 }
 
 void TetrisGame::fillRect(int16_t x, int16_t y, int16_t w, int16_t h,Environment::Color color) {
-	matrix->fillRect( x,  y,  w,  h,
+	matrix->fillRect( y, matrix->height()-1-x,  h, 2-w,
 			getMatrixColor( color));
 }
 

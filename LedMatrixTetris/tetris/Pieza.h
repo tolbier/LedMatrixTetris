@@ -24,9 +24,13 @@ public:
 
 
 	bool isParada() const;
+	bool isPrevia() const;
+	void setPrevia(bool previa);
 
 private:
     bool parada;
+    bool previa;
+
 	int8_t x,y;
 	Environment::Color color;
 	FactoriaPiezas* factoriaPiezas;
@@ -40,6 +44,7 @@ private:
 	void gravedad();
 	bool libreDebajo();
 	void drawPieza();
+	void drawPrevia() ;
 	bool libreXY(int8_t x_offset,int8_t y_offset);
 	bool libreXY(int8_t x_offset,int8_t y_offset,const uint8_t* p);
 	bool libreGiro();

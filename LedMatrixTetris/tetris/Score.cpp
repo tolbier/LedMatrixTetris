@@ -28,7 +28,7 @@ void Score::loop() {
 }
 
 void Score::drawScore() {
-	game->fillRect(0,0,5,16,Environment::Color::black);
+	game->fillRect(0,0,16,5,Environment::Color::black);
 	uint16_t divisor=1000;
 
 	for (int i=0;i<4;i++){

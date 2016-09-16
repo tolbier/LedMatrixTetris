@@ -22,7 +22,7 @@ Board::Board(TetrisGame* game) {
 //	}
 	// FIN PRUEBA
 
-	game->fillRect(10,4,22,12,Environment::Color::grey);
+	game->fillRect(0, 10,12,22,Environment::Color::grey);
 }
 
 Board::~Board() {

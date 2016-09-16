@@ -7,11 +7,14 @@
 
 #include "Pieza.h"
 
+#define PREVIA_TOP 7
+#define PREVIA_LEFT 4
+
 
 Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
 	this->factoriaPiezas = factoriaPiezas;
 	Board* board=getBoard();
-	x = board->width()/2 - board->left();
+	x = board->width()/2 - board->left()-1;
 	y = 0;
 
 
@@ -28,6 +31,7 @@ Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
 
 	currentProfileIdx=0;
 	setParada(false);
+	setPrevia(true);
 }
 
 Pieza::~Pieza() {
@@ -48,6 +52,14 @@ int8_t Pieza::getY() const {
 
 void Pieza::setY(int8_t y) {
 	this->y = y;
+}
+
+bool Pieza::isPrevia() const {
+	return previa;
+}
+
+void Pieza::setPrevia(bool previa) {
+	this->previa = previa;
 }
 
 uint8_t Pieza::getNumProfiles() const {
@@ -71,6 +83,10 @@ void Pieza::treatInput() {
 }
 
 void Pieza::loop() {
+	if (isPrevia()){
+		drawPrevia();
+		return;
+	}
 	treatInput();
 	this->gravedad();
 	this->drawPieza();
@@ -86,6 +102,11 @@ uint8_t Pieza::getNextProfileIdx(){
 }
 void Pieza::giro(){
 	setCurrentProfileIdx(getNextProfileIdx());
+}
+void Pieza::drawPrevia() {
+	getGame()->fillRect(PREVIA_LEFT,PREVIA_TOP,4,2,Environment::Color::black);
+	const uint8_t* p = this->getCurrentProfile();
+	getGame()->drawBitmap( PREVIA_LEFT, PREVIA_TOP, p,  color) ;
 }
 void Pieza::drawPieza() {
 	const uint8_t* p = this->getCurrentProfile();
