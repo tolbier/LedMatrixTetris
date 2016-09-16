@@ -67,3 +67,8 @@ void Board::setBoardColor(uint8_t x, uint8_t y,Environment::Color color) {
 Environment::Color Board::getBoardColor(uint8_t x, uint8_t y) {
 	return _board[y][x];
 }
+bool Board::checkInbounds(int8_t x_check,int8_t y_check){
+	return (x_check>=0 && x_check<this->width() &&
+			y_check>=0 && y_check<this->height() );
+
+}

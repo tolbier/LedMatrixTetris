@@ -25,13 +25,12 @@ public:
 	void setY(uint8_t y);
 	uint8_t getNumProfiles() const;
 	void loop();
-	void drawPieza();
+
 	const uint8_t* getCurrentProfile();
 	Board* getBoard();
 	FactoriaPiezas*& getFactoriaPiezas() ;
 	TetrisGame* getGame();
-	void gravedad();
-	bool libreDebajo();
+
 	uint8_t height();
 	uint8_t width();
 	bool isParada() const;
@@ -46,6 +45,13 @@ private:
 	uint8_t numProfiles;
 	uint8_t currentProfileIdx;
 	void stampPieza();
+	void treatInput() ;
+	bool libreDerecha();
+	bool libreIzquierda();
+	void gravedad();
+	bool libreDebajo();
+	void drawPieza();
+	bool libreXY(int8_t x_offset,int8_t y_offset);
 };
 
 #endif /* TETRIS_PIEZA_H_ */

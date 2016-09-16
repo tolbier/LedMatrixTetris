@@ -53,7 +53,21 @@ uint8_t Pieza::getNumProfiles() const {
 	return numProfiles;
 }
 
+void Pieza::treatInput() {
+	 while (Serial.available()) {
+	    // get the new byte:
+	    char inChar = (char)Serial.read();
+	    if (inChar=='A'){
+	    	if (libreIzquierda()) x--;
+	    }
+	    if (inChar=='D'){
+	    	if (libreDerecha()) x++;
+	    }
+	  }
+}
+
 void Pieza::loop() {
+	treatInput();
 	this->gravedad();
 	this->drawPieza();
 	if (isParada()){
@@ -65,7 +79,7 @@ void Pieza::loop() {
 
 void Pieza::drawPieza() {
 	const uint8_t* p = this->getCurrentProfile();
-	this->factoriaPiezas->getGame()->drawBitmap( BOARD_LEFT+x,  BOARD_TOP+y, p,  color) ;
+	getGame()->drawBitmap( BOARD_LEFT+x,  BOARD_TOP+y, p,  color) ;
 }
 
 const uint8_t* Pieza::getCurrentProfile() {
@@ -112,7 +126,9 @@ void Pieza::stampPieza(){
 
  }
 
-bool Pieza::libreDebajo(){
+bool Pieza::libreXY(int8_t x_offset,int8_t y_offset){
+
+
 	const uint8_t* p = this->getCurrentProfile();
 
 	uint8_t width = pgm_read_byte(p++);
@@ -128,11 +144,11 @@ bool Pieza::libreDebajo(){
 				bit = 7;
 			}
 			if ((b >> bit) & 0x1) {
-				uint8_t x_check=x+i;
-				uint8_t y_check=y+j+1;
+				int8_t x_check=x+i + x_offset;
+				int8_t y_check=y+j + y_offset;
+				if (!getBoard()->checkInbounds(x_check,y_check) ||
+				     getBoard()->getBoardColor(x_check,y_check) //Si Pieza ocupada
 
-				if (getBoard()->getBoardColor(x_check,y_check) //Si Pieza ocupada
-				   || y_check >= getBoard()->height()
 				) return false;
 
 			}
@@ -142,6 +158,18 @@ bool Pieza::libreDebajo(){
 	return true;
 
 
+}
+
+bool Pieza::libreIzquierda(){
+	return libreXY(-1,0);
+}
+bool Pieza::libreDerecha(){
+	return libreXY(+1,0);
+
+
+}
+bool Pieza::libreDebajo(){
+	return libreXY(0,+1);
 }
 
 
@@ -155,7 +183,7 @@ uint8_t Pieza::width(){
 }
 void Pieza::gravedad() {
 	static unsigned long lastMillis =0;
-	if (millis()-lastMillis<50) return;
+	if (millis()-lastMillis<250) return;
 
 	if (libreDebajo()){
 		y++;

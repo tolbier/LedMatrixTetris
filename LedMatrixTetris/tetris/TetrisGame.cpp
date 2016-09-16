@@ -27,11 +27,11 @@ TetrisGame::TetrisGame() {
 	matrixColor[Environment::Color::red]=color444(10, 0, 0);
 	matrixColor[Environment::Color::grey]=color444(1, 1, 1);
 	matrixColor[Environment::Color::white]=color444(10, 10, 10);
-
+	matrix->begin();
 	this->board = new Board(this);
 	this->factoriaPiezas= new FactoriaPiezas(this);
 	pieza=NULL;
-	matrix->begin();
+
 	score=new Score(this);
 }
 
@@ -40,7 +40,7 @@ TetrisGame::~TetrisGame() {
 }
 
 void TetrisGame::loop() {
-	if (pieza==NULL) pieza = factoriaPiezas->createPieza();
+	if (!pieza) pieza = factoriaPiezas->createPieza();
 	score->loop();
 
 	board->loop();
