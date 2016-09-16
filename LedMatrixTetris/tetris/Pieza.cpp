@@ -27,8 +27,8 @@ Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
 
 	for (int i=0;i<getNumProfiles();i++){
 		profiles[i]=p++;
-		Serial.print("profiles[i]");
-		Serial.println(*(profiles[i]));
+		Serial.print("pgm_read_byte(profiles[i])");
+		Serial.println(pgm_read_byte(profiles[i]));
 
 		uint8_t  heightProfile =pgm_read_byte(p++);
 		Serial.print("heightProfile:");
@@ -98,7 +98,7 @@ bool Pieza::libreDebajo(){
 uint8_t Pieza::height(){
 	const uint8_t* p = getCurrentProfile();
 
-	return *(p+1);
+	return pgm_read_byte(p+1);
 }
 uint8_t Pieza::width(){
 	return getCurrentProfile()[0];
