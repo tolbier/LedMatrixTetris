@@ -18,21 +18,10 @@ Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
 	const uint8_t* p= factoriaPiezas->getProfile(tipoPieza);
 
 	this->color = (Environment::Color)pgm_read_byte(p++) ;
-	Serial.print("color:");
-	Serial.println(color);
-
 	this->numProfiles =pgm_read_byte(p++);
-	Serial.print("numProfiles:");
-	Serial.println(numProfiles);
-
 	for (int i=0;i<getNumProfiles();i++){
 		profiles[i]=p++;
-		Serial.print("pgm_read_byte(profiles[i])");
-		Serial.println(pgm_read_byte(profiles[i]));
-
 		uint8_t  heightProfile =pgm_read_byte(p++);
-		Serial.print("heightProfile:");
-		Serial.println(heightProfile);
 		for (uint8_t j=0;j<heightProfile;j++) p++;
 	}
 
@@ -89,8 +78,7 @@ TetrisGame* Pieza::getGame() {
 	return factoriaPiezas;
 }
 bool Pieza::libreDebajo(){
-	Serial.print("Pieza:height()");
-	Serial.println(height());
+
 	return (y+height() <this->getBoard()->height());
 
 }

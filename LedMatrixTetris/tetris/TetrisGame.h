@@ -47,8 +47,7 @@ public:
 
 	const uint16_t getMatrixColor(Environment::Color color ) const;
 
-	uint16_t black , yellow , darkyellow , red , white , pink ,palePink ,
-				blue , cyan ,orange ,darkOrange ,green ,grey,magenta;
+
 private:
 	RGBmatrixPanel* matrix;
 	Score* score;

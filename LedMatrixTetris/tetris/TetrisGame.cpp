@@ -17,28 +17,16 @@ TetrisGame::TetrisGame() {
 			MATRIX_OE,
 			true);
 
-
-	black = color444(0, 0, 0);
-	yellow = color444(15, 15, 0);
-	red = color444(15, 0, 0);
-	white = color444(15, 15, 15);
-	blue = color444(0, 0, 10);
-	cyan = color444(0, 15, 15);
-	orange = color444(15, 5, 0);
-	green = color444(0, 15, 0);
-	grey =  color444(1, 1, 1);
-	magenta =  color888(229, 9, 127);
-
-	matrixColor[0]=black;
-	matrixColor[1]=cyan;
-	matrixColor[2]=blue;
-	matrixColor[3]=orange;
-	matrixColor[4]=yellow;
-	matrixColor[5]=green;
-	matrixColor[6]=magenta;
-	matrixColor[7]=red;
-	matrixColor[8]=grey;
-	matrixColor[9]=white;
+	matrixColor[Environment::Color::black]=color444(0, 0, 0);
+	matrixColor[Environment::Color::cyan]=color444(0, 10, 10);;
+	matrixColor[Environment::Color::blue]=color444(0, 0, 10);
+	matrixColor[Environment::Color::orange]=color444(10, 3, 0);;
+	matrixColor[Environment::Color::yellow]=color444(10, 10, 0);
+	matrixColor[Environment::Color::green]=color444(0, 10, 0);
+	matrixColor[Environment::Color::magenta]=color888(153, 6, 85);
+	matrixColor[Environment::Color::red]=color444(10, 0, 0);
+	matrixColor[Environment::Color::grey]=color444(1, 1, 1);
+	matrixColor[Environment::Color::white]=color444(10, 10, 10);
 
 	this->board = new Board(this);
 	this->factoriaPiezas= new FactoriaPiezas(this);
