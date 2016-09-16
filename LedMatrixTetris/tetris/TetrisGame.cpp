@@ -45,6 +45,10 @@ void TetrisGame::loop() {
 
 	board->loop();
 	pieza->loop();
+	if (pieza->isParada()){
+		delete pieza;
+		pieza=NULL;
+	}
 	matrix->swapBuffers(true);
 }
 

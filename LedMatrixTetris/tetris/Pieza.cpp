@@ -26,6 +26,7 @@ Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
 	}
 
 	currentProfileIdx=0;
+	setParada(false);
 }
 
 Pieza::~Pieza() {
@@ -55,6 +56,9 @@ uint8_t Pieza::getNumProfiles() const {
 void Pieza::loop() {
 	this->gravedad();
 	this->drawPieza();
+	if (isParada()){
+		stampPieza();
+	}
 
 
 }
@@ -77,6 +81,36 @@ TetrisGame* Pieza::getGame() {
  FactoriaPiezas*& Pieza::getFactoriaPiezas()  {
 	return factoriaPiezas;
 }
+void Pieza::stampPieza(){
+ 	const uint8_t* p = this->getCurrentProfile();
+
+ 	uint8_t width = pgm_read_byte(p++);
+ 	uint8_t height = pgm_read_byte(p++);
+
+ 	uint8_t b;
+ 	uint8_t bit;
+
+ 	for (uint8_t j = 0; j < height; j++) {
+ 		for (uint8_t i = 0; i < width; i++) {
+ 			if ((i % 8) == 0) {
+ 				b = pgm_read_byte(p++);
+ 				bit = 7;
+ 			}
+ 			if ((b >> bit) & 0x1) {
+
+ 				uint8_t x_check=x+i;
+ 				uint8_t y_check=y+j;
+ 				getBoard()->setBoardColor(x_check,y_check,this->color );
+
+ 			}
+ 			bit--;
+ 		}
+ 	}
+
+
+
+ }
+
 bool Pieza::libreDebajo(){
 	const uint8_t* p = this->getCurrentProfile();
 
@@ -122,6 +156,18 @@ void Pieza::gravedad() {
 	static unsigned long lastMillis =0;
 	if (millis()-lastMillis<250) return;
 
-	if (libreDebajo()) y++;
+	if (libreDebajo()){
+		y++;
+	}else{
+		setParada(true);
+	}
 	lastMillis = millis();
+}
+
+bool Pieza::isParada() const {
+	return parada;
+}
+
+void Pieza::setParada(bool parada) {
+	this->parada = parada;
 }

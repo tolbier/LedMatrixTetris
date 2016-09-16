@@ -61,7 +61,9 @@ uint8_t Board::top() {
 uint8_t Board::left() {
 	return BOARD_LEFT;
 }
-
+void Board::setBoardColor(uint8_t x, uint8_t y,Environment::Color color) {
+	_board[y][x]=color;
+}
 Environment::Color Board::getBoardColor(uint8_t x, uint8_t y) {
 	return _board[y][x];
 }

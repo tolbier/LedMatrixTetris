@@ -31,6 +31,7 @@ public:
 	void drawBoard();
 	void loop();
 	Environment::Color getBoardColor(uint8_t x, uint8_t y);
+	void setBoardColor(uint8_t x, uint8_t y,Environment::Color color);
 private:
 	TetrisGame* game;
 	Environment::Color _board[BOARD_HEIGHT][BOARD_WIDTH];

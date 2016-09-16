@@ -34,16 +34,18 @@ public:
 	bool libreDebajo();
 	uint8_t height();
 	uint8_t width();
+	bool isParada() const;
+	void setParada(bool parada);
 
 private:
-
+    bool parada;
 	uint8_t x,y;
 	Environment::Color color;
 	FactoriaPiezas* factoriaPiezas;
 	const uint8_t* profiles[4] ;
 	uint8_t numProfiles;
 	uint8_t currentProfileIdx;
-
+	void stampPieza();
 };
 
 #endif /* TETRIS_PIEZA_H_ */
