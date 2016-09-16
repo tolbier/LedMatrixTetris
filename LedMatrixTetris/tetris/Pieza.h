@@ -36,6 +36,7 @@ public:
 	uint8_t width();
 
 private:
+
 	uint8_t x,y;
 	Environment::Color color;
 	FactoriaPiezas* factoriaPiezas;

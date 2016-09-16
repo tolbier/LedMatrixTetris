@@ -78,10 +78,37 @@ TetrisGame* Pieza::getGame() {
 	return factoriaPiezas;
 }
 bool Pieza::libreDebajo(){
+	const uint8_t* p = this->getCurrentProfile();
 
-	return (y+height() <this->getBoard()->height());
+	uint8_t width = pgm_read_byte(p++);
+	uint8_t height = pgm_read_byte(p++);
+
+	uint8_t b;
+	uint8_t bit;
+
+	for (uint8_t j = 0; j < height; j++) {
+		for (uint8_t i = 0; i < width; i++) {
+			if ((i % 8) == 0) {
+				b = pgm_read_byte(p++);
+				bit = 7;
+			}
+			if ((b >> bit) & 0x1) {
+				uint8_t x_check=x+i;
+				uint8_t y_check=y+j+1;
+
+				if (getBoard()->getBoardColor(x_check,y_check) //Si Pieza ocupada
+				   || y_check >= getBoard()->height()
+				) return false;
+
+			}
+			bit--;
+		}
+	}
+	return true;
+
 
 }
+
 
 uint8_t Pieza::height(){
 	const uint8_t* p = getCurrentProfile();

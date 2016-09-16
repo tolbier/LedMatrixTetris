@@ -16,6 +16,12 @@ Board::Board(TetrisGame* game) {
 		}
 
 	}
+	//PRUEBA
+//	for(int i=19;i>=15;i--){
+//		this->_board[i][4]= Environment::Color::blue;
+//	}
+	// FIN PRUEBA
+
 	game->fillRect(10,4,22,12,Environment::Color::grey);
 }
 
