@@ -36,8 +36,8 @@ public:
 	void loop();
 
 	const uint8_t* getDigitBitmap(uint8_t digit);
-	uint8_t drawBitmap(int x, int y, const uint8_t *bmp,  Environment::Color color) ;
-	void drawPixel(int x, int y,  uint16_t color);
+	uint8_t drawBitmap(int8_t x, int8_t y, const uint8_t *bmp,  Environment::Color color) ;
+	void drawPixel(int8_t x, int8_t y,  uint16_t color);
 	Board*& getBoard() ;
 	Score*& getScore() ;
 	uint16_t color888(uint8_t r,uint8_t g,uint8_t b);

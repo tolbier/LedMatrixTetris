@@ -18,7 +18,8 @@ Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
 	const uint8_t* p= factoriaPiezas->getProfile(tipoPieza);
 
 	this->color = (Environment::Color)pgm_read_byte(p++) ;
-	this->numProfiles =pgm_read_byte(p++);
+	numProfiles =pgm_read_byte(p++);
+
 	for (int i=0;i<getNumProfiles();i++){
 		profiles[i]=p++;
 		uint8_t  heightProfile =pgm_read_byte(p++);
@@ -33,19 +34,19 @@ Pieza::~Pieza() {
 	// TODO Auto-generated destructor stub
 }
 
-uint8_t Pieza::getX() const {
+int8_t Pieza::getX() const {
 	return x;
 }
 
-void Pieza::setX(uint8_t x) {
+void Pieza::setX(int8_t x) {
 	this->x = x;
 }
 
-uint8_t Pieza::getY() const {
+int8_t Pieza::getY() const {
 	return y;
 }
 
-void Pieza::setY(uint8_t y) {
+void Pieza::setY(int8_t y) {
 	this->y = y;
 }
 
@@ -57,11 +58,14 @@ void Pieza::treatInput() {
 	 while (Serial.available()) {
 	    // get the new byte:
 	    char inChar = (char)Serial.read();
-	    if (inChar=='A'){
+	    if (inChar=='A'|| inChar=='a'){
 	    	if (libreIzquierda()) x--;
 	    }
-	    if (inChar=='D'){
+	    if (inChar=='d' || inChar=='D'){
 	    	if (libreDerecha()) x++;
+	    }
+	    if (inChar=='w' || inChar=='W'){
+	    	if (libreGiro()) giro();
 	    }
 	  }
 }
@@ -76,16 +80,24 @@ void Pieza::loop() {
 
 
 }
-
+uint8_t Pieza::getNextProfileIdx(){
+	uint8_t retorno= (getCurrentProfileIdx()+1)%(this->getNumProfiles());
+	return retorno;
+}
+void Pieza::giro(){
+	setCurrentProfileIdx(getNextProfileIdx());
+}
 void Pieza::drawPieza() {
 	const uint8_t* p = this->getCurrentProfile();
 	getGame()->drawBitmap( BOARD_LEFT+x,  BOARD_TOP+y, p,  color) ;
 }
 
 const uint8_t* Pieza::getCurrentProfile() {
-	return this->profiles[this->currentProfileIdx];
+	return this->profiles[getCurrentProfileIdx()];
 }
-
+const uint8_t* Pieza::getNextProfile() {
+	return this->profiles[getNextProfileIdx()];
+}
 Board* Pieza::getBoard() {
 	return getGame()->getBoard();
 }
@@ -96,7 +108,7 @@ TetrisGame* Pieza::getGame() {
 	return factoriaPiezas;
 }
 void Pieza::stampPieza(){
- 	const uint8_t* p = this->getCurrentProfile();
+ 	const uint8_t* p = getCurrentProfile();
 
  	uint8_t width = pgm_read_byte(p++);
  	uint8_t height = pgm_read_byte(p++);
@@ -125,12 +137,16 @@ void Pieza::stampPieza(){
 
 
  }
+bool Pieza::libreGiro(){
+	bool retorno = libreXY(0,0, this->getNextProfile());
+	return retorno;
 
+}
 bool Pieza::libreXY(int8_t x_offset,int8_t y_offset){
-
-
 	const uint8_t* p = this->getCurrentProfile();
-
+	return libreXY(x_offset,y_offset,p);
+}
+bool Pieza::libreXY(int8_t x_offset,int8_t y_offset,const uint8_t* p){
 	uint8_t width = pgm_read_byte(p++);
 	uint8_t height = pgm_read_byte(p++);
 
@@ -195,6 +211,14 @@ void Pieza::gravedad() {
 
 bool Pieza::isParada() const {
 	return parada;
+}
+
+uint8_t Pieza::getCurrentProfileIdx() const {
+	return currentProfileIdx;
+}
+
+void Pieza::setCurrentProfileIdx(uint8_t currentProfileIdx) {
+	this->currentProfileIdx = currentProfileIdx;
 }
 
 void Pieza::setParada(bool parada) {

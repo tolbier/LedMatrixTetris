@@ -138,7 +138,7 @@ Score*& TetrisGame::getScore()  {
 	return score;
 }
 
-uint8_t TetrisGame::drawBitmap(int x, int y, const uint8_t *bmp, Environment::Color color) {
+uint8_t TetrisGame::drawBitmap(int8_t x, int8_t y, const uint8_t *bmp, Environment::Color color) {
 	uint8_t width = pgm_read_byte(bmp);
 	uint8_t height = pgm_read_byte(bmp + 1);
 	const unsigned char *p = bmp + 2;
@@ -160,7 +160,7 @@ uint8_t TetrisGame::drawBitmap(int x, int y, const uint8_t *bmp, Environment::Co
 	}
 	return width;
 }
-void TetrisGame::drawPixel(int x, int y,  uint16_t color){
+void TetrisGame::drawPixel(int8_t x, int8_t y,  uint16_t color){
 	this->matrix->drawPixel(y, matrix->height()-1-x,color);
 }
 

@@ -19,26 +19,15 @@ class Pieza {
 public:
 	Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas );
 	virtual ~Pieza();
-	uint8_t getX() const;
-	void setX(uint8_t x);
-	uint8_t getY() const;
-	void setY(uint8_t y);
-	uint8_t getNumProfiles() const;
+
 	void loop();
 
-	const uint8_t* getCurrentProfile();
-	Board* getBoard();
-	FactoriaPiezas*& getFactoriaPiezas() ;
-	TetrisGame* getGame();
 
-	uint8_t height();
-	uint8_t width();
 	bool isParada() const;
-	void setParada(bool parada);
 
 private:
     bool parada;
-	uint8_t x,y;
+	int8_t x,y;
 	Environment::Color color;
 	FactoriaPiezas* factoriaPiezas;
 	const uint8_t* profiles[4] ;
@@ -52,6 +41,25 @@ private:
 	bool libreDebajo();
 	void drawPieza();
 	bool libreXY(int8_t x_offset,int8_t y_offset);
-};
+	bool libreXY(int8_t x_offset,int8_t y_offset,const uint8_t* p);
+	bool libreGiro();
+	void giro();
+	const uint8_t* getNextProfile() ;
+	const uint8_t* getCurrentProfile();
+	uint8_t getNextProfileIdx();
+	Board* getBoard();
+	FactoriaPiezas*& getFactoriaPiezas() ;
+	TetrisGame* getGame();
+	uint8_t height();
+	uint8_t width();
+	void setParada(bool parada);
+	uint8_t getCurrentProfileIdx() const;
+	void setCurrentProfileIdx(uint8_t currentProfileIdx);
+	int8_t getX() const;
+	void setX(int8_t x);
+	int8_t getY() const;
+	void setY(int8_t y);
+	uint8_t getNumProfiles() const;
+	};
 
 #endif /* TETRIS_PIEZA_H_ */
