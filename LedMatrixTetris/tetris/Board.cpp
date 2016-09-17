@@ -28,7 +28,28 @@ Board::Board(TetrisGame* game) {
 Board::~Board() {
 
 }
+void Board::check4Lines(){
+	for (int i=height()-1;i>=0;i--){
+		if (hasLine(i)){
+			this->game->drawLine(i+11,14,i+11,5,Environment::Color::white);
+		}
+	}
+	for (int i=0;i<6;i++){
+		this->game->swapBuffers(false);
+		delay(50);
+	}
 
+
+}
+bool Board::hasLine(int8_t l){
+	for (int i=0;i<width();i++){
+		if (! this->getBoardColor(i,l)){
+			return false;
+		}
+	}
+	return true;
+
+}
 uint8_t Board::width() {
 	return BOARD_WIDTH;
 }

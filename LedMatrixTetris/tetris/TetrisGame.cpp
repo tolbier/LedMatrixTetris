@@ -35,6 +35,7 @@ TetrisGame::TetrisGame() {
 	score=new Score(this);
 	nextPieza = factoriaPiezas->createPieza();
 
+
 }
 
 TetrisGame::~TetrisGame() {
@@ -57,7 +58,7 @@ void TetrisGame::loop() {
 		delete pieza;
 		pieza=NULL;
 	}
-	matrix->swapBuffers(true);
+	swapBuffers(true);
 }
 
 const uint8_t PROGMEM TetrisGame::digit_bitmaps[] = {
@@ -184,7 +185,13 @@ void TetrisGame::fillRect(int16_t x, int16_t y, int16_t w, int16_t h,Environment
 	matrix->fillRect( y, matrix->height()-1-x,  h, 2-w,
 			getMatrixColor( color));
 }
+void TetrisGame::drawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2,Environment::Color color) {
+	matrix->drawLine(x1,y1,x2,y2,getMatrixColor( color));
+}
 
 const uint16_t TetrisGame::getMatrixColor(Environment::Color color ) const {
 	return matrixColor[color] ;
+}
+void TetrisGame::swapBuffers(bool copy){
+	this->matrix->swapBuffers(copy);
 }

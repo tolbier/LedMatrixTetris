@@ -92,6 +92,7 @@ void Pieza::loop() {
 	this->drawPieza();
 	if (isParada()){
 		stampPieza();
+
 	}
 
 
@@ -155,7 +156,7 @@ void Pieza::stampPieza(){
  		}
  	}
 
-
+ 	getGame()->getBoard()->check4Lines();
 
  }
 bool Pieza::libreGiro(){

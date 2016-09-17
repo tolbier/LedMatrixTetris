@@ -33,9 +33,12 @@ public:
 	Environment::Color getBoardColor(uint8_t x, uint8_t y);
 	void setBoardColor(uint8_t x, uint8_t y,Environment::Color color);
 	bool checkInbounds(int8_t x_check,int8_t y_check);
+	void check4Lines();
 private:
 	TetrisGame* game;
 	Environment::Color _board[BOARD_HEIGHT][BOARD_WIDTH];
+
+	bool hasLine(int8_t l);
 };
 
 #endif /* TETRIS_BOARD_H_ */

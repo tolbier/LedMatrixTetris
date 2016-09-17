@@ -44,9 +44,9 @@ public:
 	uint16_t color444(uint8_t r,uint8_t g,uint8_t b);
 
 	void fillRect(int16_t x, int16_t y, int16_t w, int16_t h, Environment::Color color) ;
-
+	void drawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2,Environment::Color color) ;
 	const uint16_t getMatrixColor(Environment::Color color ) const;
-
+	void swapBuffers(bool copy);
 
 private:
 	RGBmatrixPanel* matrix;
