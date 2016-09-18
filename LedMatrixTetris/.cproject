@@ -21,8 +21,8 @@
 								<option id="it.baeyens.arduino.compiler.cpp.sketch.option.incpath.1369931343" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.cpp.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LedMatrixTetris/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LedMatrixTetris/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LedMatrixTetris/libraries/RGBmatrixPanel}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LedMatrixTetris/libraries/Adafruit_GFX}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LedMatrixTetris/libraries/RGBmatrixPanel}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.1579627757" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
 							</tool>
@@ -30,8 +30,8 @@
 								<option id="it.baeyens.arduino.compiler.c.sketch.option.incpath.1359482192" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.c.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LedMatrixTetris/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LedMatrixTetris/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LedMatrixTetris/libraries/RGBmatrixPanel}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LedMatrixTetris/libraries/Adafruit_GFX}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LedMatrixTetris/libraries/RGBmatrixPanel}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.1858976342" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
 							</tool>

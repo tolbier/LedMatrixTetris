@@ -34,7 +34,7 @@ TetrisGame::TetrisGame() {
 	pieza=NULL;
 
 	score=new Score(this);
-	leveler = new Leveler(20,this);
+	leveler = new Leveler(10,this);
 	nextPieza = factoriaPiezas->createPieza();
 
 
