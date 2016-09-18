@@ -25,14 +25,12 @@ Board::~Board() {
 }
 void Board::fallOverLine(uint16_t line){
 
-	uint16_t sizeWidth=width()*sizeof(Environment::Color);
 
 	for (int i=line;i>0;i--){
 		for (int j=0;j<width();j++){
 		  setBoardColor(j,i,this->getBoardColor(j,i-1));
 		}
 	}
-	//memmove(_board+ line,_board, 20*line);
 
 	//rellenamos de negros la primera linea
 	for (int j=0;j<width();j++){

@@ -67,6 +67,7 @@ uint8_t Pieza::getNumProfiles() const {
 }
 
 void Pieza::treatInput() {
+     setDropping(false);
 	 while (Serial.available()) {
 	    // get the new byte:
 	    char inChar = (char)Serial.read();
@@ -79,6 +80,10 @@ void Pieza::treatInput() {
 	    if (inChar=='w' || inChar=='W'){
 	    	if (libreGiro()) giro();
 	    }
+	    if (inChar=='s' || inChar=='S'){
+	    	setDropping(true);
+	    }
+
 	  }
 }
 
@@ -221,7 +226,10 @@ uint8_t Pieza::width(){
 }
 void Pieza::gravedad() {
 	static unsigned long lastMillis =0;
-	if (millis()-lastMillis<250) return;
+	unsigned long dropDivisor= 1;
+	if (isDropping()) dropDivisor=5;
+
+	if (millis()-lastMillis< (300/dropDivisor) ) return;
 
 	if (libreDebajo()){
 		y++;
@@ -245,4 +253,12 @@ void Pieza::setCurrentProfileIdx(uint8_t currentProfileIdx) {
 
 void Pieza::setParada(bool parada) {
 	this->parada = parada;
+}
+
+bool Pieza::isDropping() const {
+	return dropping;
+}
+
+void Pieza::setDropping(bool dropping) {
+	this->dropping = dropping;
 }

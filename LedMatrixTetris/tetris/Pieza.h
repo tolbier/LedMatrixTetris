@@ -26,10 +26,13 @@ public:
 	bool isParada() const;
 	bool isPrevia() const;
 	void setPrevia(bool previa);
+bool isDropping() const;
+	void setDropping(bool dropping);
 
 private:
     bool parada;
     bool previa;
+    bool dropping;
 
 	int8_t x,y;
 	Environment::Color color;
