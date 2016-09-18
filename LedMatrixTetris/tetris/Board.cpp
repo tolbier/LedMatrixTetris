@@ -16,28 +16,51 @@ Board::Board(TetrisGame* game) {
 		}
 
 	}
-	//PRUEBA
-//	for(int i=19;i>=15;i--){
-//		this->_board[i][4]= Environment::Color::blue;
-//	}
-	// FIN PRUEBA
 
-	game->fillRect(0, 10,12,22,Environment::Color::grey);
+	game->fillRect(0, BOARD_TOP-1,BOARD_WIDTH+2,BOARD_HEIGHT+1,Environment::Color::grey);
 }
 
 Board::~Board() {
 
 }
-void Board::check4Lines(){
-	for (int i=height()-1;i>=0;i--){
-		if (hasLine(i)){
-			this->game->drawLine(i+11,14,i+11,5,Environment::Color::white);
+void Board::fallOverLine(uint16_t line){
+
+	uint16_t sizeWidth=width()*sizeof(Environment::Color);
+
+	for (int i=line;i>0;i--){
+		for (int j=0;j<width();j++){
+		  setBoardColor(j,i,this->getBoardColor(j,i-1));
 		}
 	}
-	for (int i=0;i<6;i++){
-		this->game->swapBuffers(false);
-		delay(50);
+	//memmove(_board+ line,_board, 20*line);
+
+	//rellenamos de negros la primera linea
+	for (int j=0;j<width();j++){
+	  setBoardColor(j,0,Environment::Color::black);
 	}
+
+}
+void Board::check4Lines(int8_t firstLine,uint8_t numLines){
+	bool foundLines=false;
+	//Comprobar las lineas que se completaron
+	for (int i=0;i<numLines;i++){
+		uint8_t line= firstLine + i;
+		if (hasLine(line)){
+			this->game->drawLine(line+BOARD_TOP,14,line+BOARD_TOP,5,Environment::Color::white);
+			game->getScore()->addLines(1);
+			fallOverLine(line);
+			foundLines=true;
+		}
+	}
+	//HACER PARPADEAR LAS LINEAS
+	if (foundLines){
+		for (int i=0;i<6;i++){
+			this->game->swapBuffers(false);
+			delay(50);
+		}
+	}
+
+
 
 
 }

@@ -8,6 +8,7 @@
 #include "TetrisGame.h"
 
 TetrisGame::TetrisGame() {
+	level=0;
 	this->matrix= new RGBmatrixPanel(
 			MATRIX_A,
 			MATRIX_B,
@@ -49,7 +50,7 @@ void TetrisGame::loop() {
 		pieza->setPrevia(false);
 		nextPieza = factoriaPiezas->createPieza();
 	}
-	score->loop();
+
 
 	board->loop();
 	pieza->loop();
@@ -58,6 +59,8 @@ void TetrisGame::loop() {
 		delete pieza;
 		pieza=NULL;
 	}
+
+	score->loop();
 	swapBuffers(true);
 }
 
@@ -194,4 +197,12 @@ const uint16_t TetrisGame::getMatrixColor(Environment::Color color ) const {
 }
 void TetrisGame::swapBuffers(bool copy){
 	this->matrix->swapBuffers(copy);
+}
+
+uint8_t TetrisGame::getLevel() const {
+	return level;
+}
+
+void TetrisGame::addLevel(uint8_t level) {
+	this->level += level;
 }

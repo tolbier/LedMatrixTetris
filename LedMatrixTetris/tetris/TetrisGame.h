@@ -47,6 +47,8 @@ public:
 	void drawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2,Environment::Color color) ;
 	const uint16_t getMatrixColor(Environment::Color color ) const;
 	void swapBuffers(bool copy);
+	uint8_t getLevel() const;
+	void addLevel(uint8_t level);
 
 private:
 	RGBmatrixPanel* matrix;
@@ -57,7 +59,7 @@ private:
 	Pieza* nextPieza;
 	static const uint8_t PROGMEM digit_bitmaps[] ;
 	uint16_t matrixColor[10];
-
+	uint8_t level;
 };
 
 #endif /* TETRIS_TETRISGAME_H_ */

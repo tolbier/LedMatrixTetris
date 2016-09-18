@@ -7,8 +7,8 @@
 
 #include "Pieza.h"
 
-#define PREVIA_TOP 7
-#define PREVIA_LEFT 4
+#define PREVIA_TOP 12
+#define PREVIA_LEFT 12
 
 
 Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
@@ -156,7 +156,7 @@ void Pieza::stampPieza(){
  		}
  	}
 
- 	getGame()->getBoard()->check4Lines();
+ 	getGame()->getBoard()->check4Lines(y,height);
 
  }
 bool Pieza::libreGiro(){
