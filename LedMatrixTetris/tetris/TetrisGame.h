@@ -15,6 +15,7 @@
 #include "Pieza.h"
 #include "Score.h"
 #include "Board.h"
+#include "Leveler.h"
 
 #define MATRIX_CLK 11  // MUST be on PORTB! (Use pin 11 on Mega)
 #define MATRIX_LAT 33
@@ -29,6 +30,8 @@ class FactoriaPiezas;
 class RGBmatrixPanel;
 class Pieza;
 class Environment;
+class Leveler;
+
 class TetrisGame {
 public:
 	TetrisGame();
@@ -47,8 +50,8 @@ public:
 	void drawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2,Environment::Color color) ;
 	const uint16_t getMatrixColor(Environment::Color color ) const;
 	void swapBuffers(bool copy);
-	uint8_t getLevel() const;
-	void addLevel(uint8_t level);
+	void addLine();
+	Leveler*& getLeveler() ;
 
 private:
 	RGBmatrixPanel* matrix;
@@ -59,7 +62,8 @@ private:
 	Pieza* nextPieza;
 	static const uint8_t PROGMEM digit_bitmaps[] ;
 	uint16_t matrixColor[10];
-	uint8_t level;
+
+	Leveler* leveler;
 };
 
 #endif /* TETRIS_TETRISGAME_H_ */

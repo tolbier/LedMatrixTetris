@@ -8,7 +8,7 @@
 #include "TetrisGame.h"
 
 TetrisGame::TetrisGame() {
-	level=0;
+
 	this->matrix= new RGBmatrixPanel(
 			MATRIX_A,
 			MATRIX_B,
@@ -34,6 +34,7 @@ TetrisGame::TetrisGame() {
 	pieza=NULL;
 
 	score=new Score(this);
+	leveler = new Leveler(20,this);
 	nextPieza = factoriaPiezas->createPieza();
 
 
@@ -59,7 +60,7 @@ void TetrisGame::loop() {
 		delete pieza;
 		pieza=NULL;
 	}
-
+	leveler->loop();
 	score->loop();
 	swapBuffers(true);
 }
@@ -199,10 +200,13 @@ void TetrisGame::swapBuffers(bool copy){
 	this->matrix->swapBuffers(copy);
 }
 
-uint8_t TetrisGame::getLevel() const {
-	return level;
+
+void TetrisGame::addLine(){
+	this->getScore()->addLines(1);
+	getLeveler()->changeLines(getScore()->getLines());
+
 }
 
-void TetrisGame::addLevel(uint8_t level) {
-	this->level += level;
+Leveler*& TetrisGame::getLeveler()  {
+	return leveler;
 }

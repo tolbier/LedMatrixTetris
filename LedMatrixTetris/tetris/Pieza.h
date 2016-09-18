@@ -10,6 +10,8 @@
 #include "Arduino.h"
 #include "Environment.h"
 #include "FactoriaPiezas.h"
+
+
 class Environment;
 
 class FactoriaPiezas;
@@ -30,6 +32,8 @@ bool isDropping() const;
 	void setDropping(bool dropping);
 
 private:
+	static const unsigned long speedTimes[];
+
     bool parada;
     bool previa;
     bool dropping;
@@ -68,6 +72,7 @@ private:
 	int8_t getY() const;
 	void setY(int8_t y);
 	uint8_t getNumProfiles() const;
+	unsigned long getSpeedTime();
 	};
 
 #endif /* TETRIS_PIEZA_H_ */

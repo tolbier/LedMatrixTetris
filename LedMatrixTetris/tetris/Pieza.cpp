@@ -229,7 +229,8 @@ void Pieza::gravedad() {
 	unsigned long dropDivisor= 1;
 	if (isDropping()) dropDivisor=5;
 
-	if (millis()-lastMillis< (300/dropDivisor) ) return;
+	unsigned long speedTime = this->getGame()->getLeveler()->getSpeedTime();
+	if (millis()-lastMillis< (speedTime/dropDivisor) ) return;
 
 	if (libreDebajo()){
 		y++;
@@ -262,3 +263,4 @@ bool Pieza::isDropping() const {
 void Pieza::setDropping(bool dropping) {
 	this->dropping = dropping;
 }
+
