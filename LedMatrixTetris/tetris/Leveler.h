@@ -8,6 +8,7 @@
 #ifndef TETRIS_LEVELER_H_
 #define TETRIS_LEVELER_H_
 #include "TetrisGame.h"
+#define LEVELER_MAX_LEVEL 10
 
 class TetrisGame;
 class Leveler {
@@ -28,10 +29,8 @@ private:
 	uint8_t getInitLevel() const;
 	void setInitLevel(uint8_t initLevel);
 
-	const uint8_t* getLevelColors(uint8_t level);
-	void drawBlinkLeveler();
-	static const uint8_t colors[];
-	static const uint8_t coords[];
+
+
 	static const unsigned long speedTimes[] ;
 };
 

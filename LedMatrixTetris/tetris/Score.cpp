@@ -53,7 +53,8 @@ uint16_t Score::getPoints() const {
 }
 
 void Score::setPoints(uint16_t points) {
-	this->points = points%10000;
+	if (points>10000) points=10000;
+	this->points = points;
 }
 void Score::addPoints(uint16_t points) {
 	setPoints(getPoints()+ points);
@@ -63,6 +64,17 @@ uint16_t Score::getLines() const {
 	return lines;
 }
 
-void Score::addLines(uint16_t lines) {
+void Score::addLines(uint8_t lines) {
 	this->lines += lines;
+	addPoints(calculatePoints(lines));
+
 }
+
+uint16_t Score::calculatePoints(uint8_t lines){
+	uint8_t level = this->game->getLeveler()->getLevel();
+	return (uint16_t)pointsPerLines[ (lines-1)%4] *(uint16_t)level;
+
+}
+const uint8_t Score::pointsPerLines[]={
+		1,3,9,27
+};

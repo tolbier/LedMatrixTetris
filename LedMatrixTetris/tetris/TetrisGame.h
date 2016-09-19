@@ -50,7 +50,7 @@ public:
 	void drawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2,Environment::Color color) ;
 	const uint16_t getMatrixColor(Environment::Color color ) const;
 	void swapBuffers(bool copy);
-	void addLine();
+	void addLines(uint8_t lines);
 	Leveler*& getLeveler() ;
 
 private:

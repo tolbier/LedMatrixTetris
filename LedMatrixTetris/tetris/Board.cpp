@@ -39,24 +39,26 @@ void Board::fallOverLine(uint16_t line){
 
 }
 void Board::check4Lines(int8_t firstLine,uint8_t numLines){
-	bool foundLines=false;
+	int foundLines=0;
 	//Comprobar las lineas que se completaron
 	for (int i=0;i<numLines;i++){
 		uint8_t line= firstLine + i;
 		if (hasLine(line)){
 			this->game->drawLine(line+BOARD_TOP,14,line+BOARD_TOP,5,Environment::Color::white);
-			game->addLine();
 			fallOverLine(line);
-			foundLines=true;
+			foundLines++;;
 		}
 	}
 	//HACER PARPADEAR LAS LINEAS
 	if (foundLines){
+
 		for (int i=0;i<6;i++){
 			this->game->swapBuffers(false);
 			delay(50);
 		}
+		game->addLines(foundLines);
 	}
+
 
 
 

@@ -34,7 +34,7 @@ TetrisGame::TetrisGame() {
 	pieza=NULL;
 
 	score=new Score(this);
-	leveler = new Leveler(10,this);
+	leveler = new Leveler(4,this);
 	nextPieza = factoriaPiezas->createPieza();
 
 
@@ -201,8 +201,8 @@ void TetrisGame::swapBuffers(bool copy){
 }
 
 
-void TetrisGame::addLine(){
-	this->getScore()->addLines(1);
+void TetrisGame::addLines(uint8_t lines){
+	this->getScore()->addLines(lines);
 	getLeveler()->changeLines(getScore()->getLines());
 
 }

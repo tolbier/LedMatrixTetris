@@ -19,19 +19,20 @@ public:
 	void loop();
 	uint16_t getPoints() const;
 	void setPoints(uint16_t points);
-	void addPoints(uint16_t points) ;
 	uint16_t getLines() const;
 	void setLines(uint16_t lines);
-	void addLines(uint16_t lines);
+	void addLines(uint8_t lines);
 
 private:
 	uint16_t points;
 	uint16_t lines;
 	TetrisGame* game;
-
+	void addPoints(uint16_t points) ;
 	void drawScore();
 	void drawPoints() ;
 	void drawLines() ;
+	uint16_t calculatePoints(uint8_t lines);
+	static const uint8_t pointsPerLines[] ;
 };
 
 #endif /* TETRIS_SCORE_H_ */
