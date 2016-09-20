@@ -34,12 +34,12 @@ TetrisGame::TetrisGame(RGBmatrixPanel* matrix, bool demo) {
 }
 
 TetrisGame::~TetrisGame() {
-	delete pieza;
-	delete score;
-	delete nextPieza;
-	delete factoriaPiezas;
-	delete leveler;
-
+	//if (pieza)	delete pieza;
+	if (nextPieza)	delete nextPieza;
+	if (score) delete score;
+	if (factoriaPiezas) delete factoriaPiezas;
+	if (leveler) delete leveler;
+	if (board) delete board;
 
 }
 
