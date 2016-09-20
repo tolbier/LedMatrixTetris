@@ -32,6 +32,7 @@ Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
 	currentProfileIdx=0;
 	setParada(false);
 	setPrevia(true);
+	demoXtarget = random(9);
 }
 
 Pieza::~Pieza() {
@@ -66,16 +67,33 @@ uint8_t Pieza::getNumProfiles() const {
 	return numProfiles;
 }
 
+void Pieza::playDemo() {
+	static unsigned long lastMillis=0;
+	if (millis()-lastMillis<300) return;
+	if (demoXtarget<x){
+		mueveIzquierda();
+	}else if (demoXtarget>x){
+		mueveDerecha();
+	}
+	lastMillis=millis();
+}
+void Pieza::mueveIzquierda(){
+	if (libreIzquierda()) x--;
+}
+void Pieza::mueveDerecha(){
+	if (libreDerecha()) x++;
+}
+
 void Pieza::treatInput() {
      setDropping(false);
 	 while (Serial.available()) {
 	    // get the new byte:
 	    char inChar = (char)Serial.read();
 	    if (inChar=='A'|| inChar=='a'){
-	    	if (libreIzquierda()) x--;
+	    	mueveIzquierda();
 	    }
 	    if (inChar=='d' || inChar=='D'){
-	    	if (libreDerecha()) x++;
+	    	mueveDerecha();
 	    }
 	    if (inChar=='w' || inChar=='W'){
 	    	if (libreGiro()) giro();
@@ -92,7 +110,11 @@ void Pieza::loop() {
 		drawPrevia();
 		return;
 	}
-	treatInput();
+	if (this->getGame()->isDemo()){
+		playDemo();
+	}else{
+		treatInput();
+	}
 	this->gravedad();
 	this->drawPieza();
 	if (isParada()){
@@ -164,6 +186,12 @@ void Pieza::stampPieza(){
  	getGame()->getBoard()->check4Lines(y,height);
 
  }
+bool Pieza::libre(){
+	bool retorno = libreXY(0,0);
+	return retorno;
+
+}
+
 bool Pieza::libreGiro(){
 	bool retorno = libreXY(0,0, this->getNextProfile());
 	return retorno;

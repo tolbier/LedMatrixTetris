@@ -28,7 +28,8 @@ public:
 	bool isParada() const;
 	bool isPrevia() const;
 	void setPrevia(bool previa);
-bool isDropping() const;
+	bool libre();
+	bool isDropping() const;
 	void setDropping(bool dropping);
 
 private:
@@ -37,7 +38,7 @@ private:
     bool parada;
     bool previa;
     bool dropping;
-
+    uint8_t demoXtarget;
 	int8_t x,y;
 	Environment::Color color;
 	FactoriaPiezas* factoriaPiezas;
@@ -73,6 +74,10 @@ private:
 	void setY(int8_t y);
 	uint8_t getNumProfiles() const;
 	unsigned long getSpeedTime();
+	void playDemo() ;
+	void mueveIzquierda();
+
+	void mueveDerecha();
 	};
 
 #endif /* TETRIS_PIEZA_H_ */

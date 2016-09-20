@@ -7,40 +7,39 @@
 
 #include "TetrisGame.h"
 
-TetrisGame::TetrisGame() {
+TetrisGame::TetrisGame(RGBmatrixPanel* matrix, bool demo) {
 
-	this->matrix= new RGBmatrixPanel(
-			MATRIX_A,
-			MATRIX_B,
-			MATRIX_C,
-			MATRIX_CLK,
-			MATRIX_LAT,
-			MATRIX_OE,
-			true);
+	this->matrix = matrix;
 
 	matrixColor[Environment::Color::black]=color444(0, 0, 0);
-	matrixColor[Environment::Color::cyan]=color444(0, 10, 10);;
-	matrixColor[Environment::Color::blue]=color444(0, 0, 10);
-	matrixColor[Environment::Color::orange]=color444(10, 3, 0);;
-	matrixColor[Environment::Color::yellow]=color444(10, 10, 0);
-	matrixColor[Environment::Color::green]=color444(0, 10, 0);
+	matrixColor[Environment::Color::cyan]=color444(0, 15, 15);;
+	matrixColor[Environment::Color::blue]=color444(0, 0, 15);
+	matrixColor[Environment::Color::orange]=color444(15, 7, 0);;
+	matrixColor[Environment::Color::yellow]=color444(15, 15, 0);
+	matrixColor[Environment::Color::green]=color444(0, 15, 0);
 	matrixColor[Environment::Color::magenta]=color888(153, 6, 85);
 	matrixColor[Environment::Color::red]=color444(10, 0, 0);
 	matrixColor[Environment::Color::grey]=color444(1, 1, 1);
-	matrixColor[Environment::Color::white]=color444(10, 10, 10);
-	matrix->begin();
+	matrixColor[Environment::Color::white]=color444(15, 15, 15);
+
 	this->board = new Board(this);
 	this->factoriaPiezas= new FactoriaPiezas(this);
 	pieza=NULL;
 
 	score=new Score(this);
-	leveler = new Leveler(4,this);
+	leveler = new Leveler(10,this);
 	nextPieza = factoriaPiezas->createPieza();
-
+	this->demo = demo;
 
 }
 
 TetrisGame::~TetrisGame() {
+	delete pieza;
+	delete score;
+	delete nextPieza;
+	delete factoriaPiezas;
+	delete leveler;
+
 
 }
 
@@ -48,6 +47,10 @@ void TetrisGame::loop() {
 	if (!pieza){
 		//TODO refactorizar esté código
 		pieza = nextPieza;
+		if (!pieza->libre()){
+			setEndOfGame(true);
+			return;
+		}
 		pieza->setPrevia(false);
 		nextPieza = factoriaPiezas->createPieza();
 	}
@@ -209,4 +212,12 @@ void TetrisGame::addLines(uint8_t lines){
 
 Leveler*& TetrisGame::getLeveler()  {
 	return leveler;
+}
+
+bool TetrisGame::isEndOfGame() const {
+	return endOfGame;
+}
+
+void TetrisGame::setEndOfGame(bool endOfGame) {
+	this->endOfGame = endOfGame;
 }
