@@ -32,6 +32,7 @@ Pieza::Pieza(uint8_t tipoPieza ,FactoriaPiezas* factoriaPiezas) {
 	currentProfileIdx=0;
 	setParada(false);
 	setPrevia(true);
+	setDropping(false);
 	demoXtarget = random(9);
 }
 
