@@ -26,9 +26,11 @@ void setup()
 void loop()
 {
 	game->loop();
-    if (game->isEndOfGame()){
+	bool requestStart=game->isRequestStart();
+	bool demo = !requestStart;
+    if (game->isEndOfGame() || requestStart){
     	delete game;
-    	game= new TetrisGame(matrix,true);
+       	game= new TetrisGame(matrix,demo);
 
     }
 }

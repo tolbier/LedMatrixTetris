@@ -54,9 +54,12 @@ public:
 
 	bool isEndOfGame() const;
 	void setEndOfGame(bool endOfGame);
+	bool isRequestStart() const;
 
 private:
+	void treatInputDemo() ;
 	bool demo;
+	bool requestStart;
 	bool endOfGame=false;
 	RGBmatrixPanel* matrix;
 	Score* score;

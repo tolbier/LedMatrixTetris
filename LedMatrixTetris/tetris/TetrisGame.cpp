@@ -30,6 +30,7 @@ TetrisGame::TetrisGame(RGBmatrixPanel* matrix, bool demo) {
 	leveler = new Leveler(10,this);
 	nextPieza = factoriaPiezas->createPieza();
 	this->demo = demo;
+	this->requestStart=false;
 
 }
 
@@ -42,7 +43,20 @@ TetrisGame::~TetrisGame() {
 	if (board) delete board;
 
 }
+void TetrisGame::treatInputDemo() {
 
+	 while (Serial.available()) {
+	    // get the new byte:
+	    char inChar = (char)Serial.read();
+	    if ( 	(inChar=='A'|| inChar=='a')||
+	    		(inChar=='d' || inChar=='D')||
+				(inChar=='w' || inChar=='W') ||
+				(inChar=='s' || inChar=='S')){
+	    	this->requestStart = true;
+	    }
+
+	  }
+}
 void TetrisGame::loop() {
 	if (!pieza){
 		//TODO refactorizar esté código
@@ -65,6 +79,9 @@ void TetrisGame::loop() {
 	}
 	leveler->loop();
 	score->loop();
+	if (this->isDemo()){
+		treatInputDemo();
+	}
 	swapBuffers(true);
 }
 
@@ -220,4 +237,8 @@ bool TetrisGame::isEndOfGame() const {
 
 void TetrisGame::setEndOfGame(bool endOfGame) {
 	this->endOfGame = endOfGame;
-}
+	}
+
+	bool TetrisGame::isRequestStart() const {
+		return requestStart;
+	}
