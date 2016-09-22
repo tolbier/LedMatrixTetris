@@ -44,7 +44,7 @@ void Board::check4Lines(int8_t firstLine,uint8_t numLines){
 	for (int i=0;i<numLines;i++){
 		uint8_t line= firstLine + i;
 		if (hasLine(line)){
-			this->game->drawLine(line+BOARD_TOP,14,line+BOARD_TOP,5,Environment::Color::white);
+			this->game->drawLine(BOARD_LEFT,line+BOARD_TOP,BOARD_WIDTH,line+BOARD_TOP,Environment::Color::white);
 			fallOverLine(line);
 			foundLines++;;
 		}

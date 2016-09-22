@@ -16,6 +16,7 @@ void setup()
 		true);
 
 	randomSeed(analogRead(0));
+	matrix->setRotation(3);
 	Serial.begin(9600);
 	matrix->begin();
 	game= new TetrisGame(matrix,true);

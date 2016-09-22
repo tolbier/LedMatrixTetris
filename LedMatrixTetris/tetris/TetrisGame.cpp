@@ -27,7 +27,7 @@ TetrisGame::TetrisGame(RGBmatrixPanel* matrix, bool demo) {
 	pieza=NULL;
 
 	score=new Score(this);
-	leveler = new Leveler(10,this);
+	leveler = new Leveler(4,this);
 	nextPieza = factoriaPiezas->createPieza();
 	this->demo = demo;
 	this->requestStart=false;
@@ -194,7 +194,7 @@ uint8_t TetrisGame::drawBitmap(int8_t x, int8_t y, const uint8_t *bmp, Environme
 	return width;
 }
 void TetrisGame::drawPixel(int8_t x, int8_t y,  uint16_t color){
-	this->matrix->drawPixel(y, matrix->height()-1-x,color);
+	this->matrix->drawPixel(x, y,color);
 }
 
 uint16_t TetrisGame::color888(uint8_t r, uint8_t g, uint8_t b) {
@@ -206,7 +206,7 @@ uint16_t TetrisGame::color444(uint8_t r, uint8_t g, uint8_t b) {
 }
 
 void TetrisGame::fillRect(int16_t x, int16_t y, int16_t w, int16_t h,Environment::Color color) {
-	matrix->fillRect( y, matrix->height()-1-x,  h, 2-w,
+	matrix->fillRect( x, y,  w, h,
 			getMatrixColor( color));
 }
 void TetrisGame::drawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2,Environment::Color color) {
