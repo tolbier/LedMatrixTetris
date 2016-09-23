@@ -18,6 +18,7 @@
 #include "Leveler.h"
 
 
+#define DEMO_LEVEL 10
 
 class Score;
 class Board;

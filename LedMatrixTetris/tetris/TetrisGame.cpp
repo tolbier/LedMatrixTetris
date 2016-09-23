@@ -27,7 +27,7 @@ TetrisGame::TetrisGame(RGBmatrixPanel* matrix, bool demo) {
 	pieza=NULL;
 
 	score=new Score(this);
-	leveler = new Leveler(4,this);
+	leveler = new Leveler(DEMO_LEVEL,this);
 	nextPieza = factoriaPiezas->createPieza();
 	this->demo = demo;
 	this->requestStart=false;

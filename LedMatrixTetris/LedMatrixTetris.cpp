@@ -3,7 +3,7 @@
 
 TetrisGame* game;
 RGBmatrixPanel* matrix;
-
+LevelSelector* levelSelector;
 void setup()
 {
 	matrix= new RGBmatrixPanel(
@@ -20,18 +20,27 @@ void setup()
 	Serial.begin(9600);
 	matrix->begin();
 	game= new TetrisGame(matrix,true);
-
+	levelSelector = NULL;
 }
 
 
 void loop()
 {
-	game->loop();
-	bool requestStart=game->isRequestStart();
-	bool demo = !requestStart;
-    if (game->isEndOfGame() || requestStart){
-    	delete game;
-       	game= new TetrisGame(matrix,demo);
+	if (game){
+		game->loop();
+		bool requestStart=game->isRequestStart();
+		if (game->isEndOfGame() || requestStart){
+			delete game;
+			game=NULL;
+			if (requestStart){
+				levelSelector = new  LevelSelector(matrix);
+			}else{
+				game= new TetrisGame(matrix,true);
+			}
 
-    }
+		}
+	}
+	if (levelSelector){
+		levelSelector->loop();
+	}
 }

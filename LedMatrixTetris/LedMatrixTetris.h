@@ -8,6 +8,7 @@
 #define _LedMatrixTetris_H_
 #include "Arduino.h"
 #include "tetris/TetrisGame.h"
+#include "tetris/LevelSelector.h"
 //add your includes for the project LedMatrixTetris here
 #define MATRIX_CLK 11  // MUST be on PORTB! (Use pin 11 on Mega)
 #define MATRIX_LAT 33
