@@ -7,6 +7,8 @@
 #ifndef _LedMatrixTetris_H_
 #define _LedMatrixTetris_H_
 #include "Arduino.h"
+#include <Adafruit_GFX.h>   // Core graphics library
+#include <RGBmatrixPanel.h> // Hardware-specific library
 #include "tetris/TetrisGame.h"
 #include "tetris/LevelSelector.h"
 //add your includes for the project LedMatrixTetris here

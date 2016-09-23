@@ -1,4 +1,5 @@
 // Do not remove the include below
+
 #include "LedMatrixTetris.h"
 
 TetrisGame* game;
@@ -33,6 +34,9 @@ void loop()
 			delete game;
 			game=NULL;
 			if (requestStart){
+				if (levelSelector) {
+					delete levelSelector;
+				}
 				levelSelector = new  LevelSelector(matrix);
 			}else{
 				game= new TetrisGame(matrix,true);
@@ -43,4 +47,5 @@ void loop()
 	if (levelSelector){
 		levelSelector->loop();
 	}
+	matrix->swapBuffers(true);
 }

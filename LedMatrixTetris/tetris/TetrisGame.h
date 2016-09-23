@@ -68,7 +68,7 @@ private:
 	FactoriaPiezas* factoriaPiezas;
 	Pieza* pieza;
 	Pieza* nextPieza;
-	static const uint8_t PROGMEM digit_bitmaps[] ;
+
 	uint16_t matrixColor[10];
 
 	Leveler* leveler;
