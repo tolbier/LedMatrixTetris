@@ -10,7 +10,7 @@
 Leveler::Leveler(uint8_t level, TetrisGame* game) {
 	setInitLevel(level);
 	this->game=game;
-	setLevel(getInitLevel());
+
 }
 
 Leveler::~Leveler() {
@@ -19,6 +19,12 @@ Leveler::~Leveler() {
 
 uint8_t Leveler::getLevel() const {
 	return level;
+}
+void Leveler::addInitLevel() {
+	setInitLevel(this->initLevel+1);
+}
+void Leveler::substractInitLevel() {
+	setInitLevel(this->initLevel-1);
 }
 
 void Leveler::setLevel(uint8_t level) {
@@ -39,12 +45,23 @@ void Leveler::changeLines(uint16_t lines) {
 void Leveler::loop() {
 	this->drawLeveler();
 }
-void Leveler::drawLeveler() {
-	game->fillRect(12,27, 4 ,5,Environment::Color::black);
+void Leveler::drawLevelerDigit() {
+
 	uint8_t digit = this->level%10;
 
 	if (level>=10)game->drawBitmap(11,27,  game->getDigitBitmap(1), Environment::Color::red);
 	game->drawBitmap(13,27,  game->getDigitBitmap(digit), Environment::Color::red);
+
+}
+void Leveler::drawLeveler() {
+
+	game->fillRect(12,27, 4 ,5,Environment::Color::black);
+	drawLevelerDigit();
+
+	if 		(game->isLevelSelection() &&
+			(((millis()%500)>250ul)))
+			game->fillRect(12,27, 4 ,5,Environment::Color::black);
+
 
 
 }
@@ -60,6 +77,7 @@ void Leveler::setInitLevel(uint8_t initLevel) {
 		initLevel=LEVELER_MAX_LEVEL;
 	}
 	this->initLevel = initLevel;
+	setLevel(initLevel);
 }
 
 

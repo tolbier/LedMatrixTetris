@@ -10,15 +10,15 @@
 #include "Arduino.h"
 #include <Adafruit_GFX.h>   // Core graphics library
 #include <RGBmatrixPanel.h> // Hardware-specific library
+#include "FontTomThumb.h"
 #include "Environment.h"
 #include "FactoriaPiezas.h"
 #include "Pieza.h"
 #include "Score.h"
 #include "Board.h"
 #include "Leveler.h"
-
-
-#define DEMO_LEVEL 10
+#define INIT_LEVEL_DEMO 10
+#define INIT_LEVEL_GAME 1
 
 class Score;
 class Board;
@@ -49,18 +49,23 @@ public:
 	void addLines(uint8_t lines);
 	Leveler*& getLeveler() ;
 
-	bool isDemo() const {
-		return demo;
-	}
 
 	bool isEndOfGame() const;
 	void setEndOfGame(bool endOfGame);
 	bool isRequestStart() const;
+	bool isDemo() const;
+	bool isLevelSelection() const;
+bool isGameOver() const;
+	void setGameOver(bool gameOver = false);
 
 private:
+	void showGameOver();
 	void treatInputDemo() ;
+	void treatInputSelection();
 	bool demo;
+	bool levelSelection;
 	bool requestStart;
+	bool gameOver=false;
 	bool endOfGame=false;
 	RGBmatrixPanel* matrix;
 	Score* score;
@@ -68,7 +73,7 @@ private:
 	FactoriaPiezas* factoriaPiezas;
 	Pieza* pieza;
 	Pieza* nextPieza;
-
+	static const uint8_t PROGMEM digit_bitmaps[] ;
 	uint16_t matrixColor[10];
 
 	Leveler* leveler;

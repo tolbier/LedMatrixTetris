@@ -7,10 +7,8 @@
 #ifndef _LedMatrixTetris_H_
 #define _LedMatrixTetris_H_
 #include "Arduino.h"
-#include <Adafruit_GFX.h>   // Core graphics library
-#include <RGBmatrixPanel.h> // Hardware-specific library
+
 #include "tetris/TetrisGame.h"
-#include "tetris/LevelSelector.h"
 //add your includes for the project LedMatrixTetris here
 #define MATRIX_CLK 11  // MUST be on PORTB! (Use pin 11 on Mega)
 #define MATRIX_LAT 33
@@ -18,6 +16,9 @@
 #define MATRIX_A   30
 #define MATRIX_B   31
 #define MATRIX_C   32
+
+
+
 
 //end of add your includes here
 

@@ -16,8 +16,8 @@ Board::Board(TetrisGame* game) {
 		}
 
 	}
+	borderDrawn=false;
 
-	game->fillRect(0, BOARD_TOP-1,BOARD_WIDTH+2,BOARD_HEIGHT+1,Environment::Color::grey);
 }
 
 Board::~Board() {
@@ -83,8 +83,14 @@ uint8_t Board::height() {
 void Board::loop() {
 	this->drawBoard();
 }
+void Board::drawBorder(){
+	if (!borderDrawn){
+		game->fillRect(0, BOARD_TOP-1,BOARD_WIDTH+2,BOARD_HEIGHT+1,Environment::Color::grey);
+		borderDrawn=true;
+	}
+}
 void Board::drawBoard() {
-
+	drawBorder();
 	for (int i=0;i<height();i++){
 		for (int j=0;j<width();j++){
 

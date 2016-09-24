@@ -22,15 +22,20 @@ TetrisGame::TetrisGame(RGBmatrixPanel* matrix, bool demo) {
 	matrixColor[Environment::Color::grey]=color444(1, 1, 1);
 	matrixColor[Environment::Color::white]=color444(15, 15, 15);
 
+	matrix->fillScreen(getMatrixColor(Environment::Color::black));
+
 	this->board = new Board(this);
 	this->factoriaPiezas= new FactoriaPiezas(this);
 	pieza=NULL;
 
 	score=new Score(this);
-	leveler = new Leveler(DEMO_LEVEL,this);
+	leveler = new Leveler((demo?INIT_LEVEL_DEMO:INIT_LEVEL_GAME),this);
 	nextPieza = factoriaPiezas->createPieza();
 	this->demo = demo;
 	this->requestStart=false;
+	levelSelection=!demo;
+
+
 
 }
 
@@ -42,6 +47,24 @@ TetrisGame::~TetrisGame() {
 	if (leveler) delete leveler;
 	if (board) delete board;
 
+}
+void TetrisGame::treatInputSelection() {
+
+	 while (Serial.available()) {
+	    // get the new byte:
+	    char inChar = (char)Serial.read();
+	    if ( 	(inChar=='A'|| inChar=='a')){
+	    	leveler->substractInitLevel();
+	    } else if ( 	(inChar=='D'|| inChar=='d')){
+	    	leveler->addInitLevel();
+
+	    } else if ( 	(inChar=='S'|| inChar=='s')){
+
+	    	this->levelSelection=false;
+
+	    }
+
+	  }
 }
 void TetrisGame::treatInputDemo() {
 
@@ -57,12 +80,45 @@ void TetrisGame::treatInputDemo() {
 
 	  }
 }
+void TetrisGame::showGameOver(){
+	  static unsigned long lastMillis=millis();
+	  fillRect(0,10,matrix->width(),11,Environment::Color::black);
+	  matrix->setTextWrap(false); // Allow text to run off right edge
+	  matrix->setTextSize(1);
+	  matrix->setFont(&FontTomThumb::TomThumb);
+	  matrix->setTextColor(matrix->Color888(255, 0,0));
+	  uint8_t offs=10;
+	  matrix->setCursor(0, 5+offs);
+	  matrix->print("GAME");
+	  matrix->setCursor(0, 11+offs);
+	  matrix->print("OVER");
+
+	  if (millis()-lastMillis<4000) return;
+
+	  setEndOfGame(true);
+
+}
 void TetrisGame::loop() {
+
+	if (isGameOver()){
+		showGameOver();
+
+		return;
+	}
+	if (levelSelection){
+		leveler->loop();
+		treatInputSelection();
+		return;
+	}
 	if (!pieza){
 		//TODO refactorizar esté código
 		pieza = nextPieza;
 		if (!pieza->libre()){
-			setEndOfGame(true);
+			if (this->demo){
+				setEndOfGame(true);
+			}else{
+				setGameOver(true);
+			}
 			return;
 		}
 		pieza->setPrevia(false);
@@ -85,8 +141,82 @@ void TetrisGame::loop() {
 
 }
 
+const uint8_t PROGMEM TetrisGame::digit_bitmaps[] = {
+	//0
+	3,5,
+	0b11100000,
+	0b10100000,
+	0b10100000,
+	0b10100000,
+	0b11100000,
+	//1
+	3,5,
+	0b01000000,
+	0b01000000,
+	0b01000000,
+	0b01000000,
+	0b01000000,
+	//2
+	3,5,
+	0b11100000,
+	0b00100000,
+	0b11100000,
+	0b10000000,
+	0b11100000,
+	//3
+	3,5,
+	0b11100000,
+	0b00100000,
+	0b11100000,
+	0b00100000,
+	0b11100000,
+	//4
+	3,5,
+	0b10100000,
+	0b10100000,
+	0b11100000,
+	0b00100000,
+	0b00100000,
+	//5
+	3,5,
+	0b11100000,
+	0b10000000,
+	0b11100000,
+	0b00100000,
+	0b11100000,
+	//6
+	3,5,
+	0b11100000,
+	0b10000000,
+	0b11100000,
+	0b10100000,
+	0b11100000,
+	//7
+	3,5,
+	0b11100000,
+	0b00100000,
+	0b00100000,
+	0b00100000,
+	0b00100000,
+	//8
+	3,5,
+	0b11100000,
+	0b10100000,
+	0b11100000,
+	0b10100000,
+	0b11100000,
+	//9
+	3,5,
+	0b11100000,
+	0b10100000,
+	0b11100000,
+	0b00100000,
+	0b00100000
+
+	};
+
 const uint8_t* TetrisGame::getDigitBitmap(uint8_t digit) {
-	return Environment::digit_bitmaps + digit*7;
+	return this->digit_bitmaps + digit*7;
 }
 
 Board*& TetrisGame::getBoard()  {
@@ -167,4 +297,20 @@ void TetrisGame::setEndOfGame(bool endOfGame) {
 
 	bool TetrisGame::isRequestStart() const {
 		return requestStart;
-	}
+}
+
+bool TetrisGame::isDemo() const {
+	return demo;
+}
+
+bool TetrisGame::isLevelSelection() const {
+	return levelSelection;
+}
+
+bool TetrisGame::isGameOver() const {
+	return gameOver;
+}
+
+void TetrisGame::setGameOver(bool gameOver ) {
+	this->gameOver = gameOver;
+}
