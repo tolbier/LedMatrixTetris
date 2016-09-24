@@ -39,6 +39,8 @@ private:
 	Environment::Color _board[BOARD_HEIGHT][BOARD_WIDTH];
 	void fallOverLine(uint16_t line);
 	bool hasLine(int8_t l);
+	void drawBorder();
+	bool borderDrawn;
 };
 
 #endif /* TETRIS_BOARD_H_ */

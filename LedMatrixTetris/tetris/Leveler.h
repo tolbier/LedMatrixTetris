@@ -20,7 +20,8 @@ public:
 	void loop();
 	void drawLeveler() ;
 	unsigned long getSpeedTime();
-
+	void addInitLevel() ;
+	void substractInitLevel() ;
 private:
 	uint8_t level;
 	uint8_t initLevel;
@@ -28,7 +29,7 @@ private:
 	void setLevel(uint8_t level);
 	uint8_t getInitLevel() const;
 	void setInitLevel(uint8_t initLevel);
-
+	void drawLevelerDigit();
 
 
 	static const unsigned long speedTimes[] ;
