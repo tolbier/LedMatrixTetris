@@ -10,6 +10,7 @@
 #include "Arduino.h"
 #include <Adafruit_GFX.h>   // Core graphics library
 #include <RGBmatrixPanel.h> // Hardware-specific library
+#include <AnalogMultiButton.h>
 #include "FontTomThumb.h"
 #include "Environment.h"
 #include "FactoriaPiezas.h"
@@ -30,7 +31,7 @@ class Leveler;
 
 class TetrisGame {
 public:
-	TetrisGame(RGBmatrixPanel* matrix, bool demo);
+	TetrisGame(RGBmatrixPanel* matrix, AnalogMultiButton *buttons, bool demo);
 	virtual ~TetrisGame();
 	void loop();
 
@@ -39,6 +40,7 @@ public:
 	void drawPixel(int8_t x, int8_t y,  uint16_t color);
 	Board*& getBoard() ;
 	Score*& getScore() ;
+	AnalogMultiButton*& getButtons() ;
 	uint16_t color888(uint8_t r,uint8_t g,uint8_t b);
 	uint16_t color444(uint8_t r,uint8_t g,uint8_t b);
 
@@ -69,6 +71,7 @@ private:
 	bool gameOver=false;
 	bool endOfGame=false;
 	RGBmatrixPanel* matrix;
+	AnalogMultiButton *buttons;
 	Score* score;
 	Board* board;
 	FactoriaPiezas* factoriaPiezas;

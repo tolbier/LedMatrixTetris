@@ -7,10 +7,10 @@
 
 #include "TetrisGame.h"
 
-TetrisGame::TetrisGame(RGBmatrixPanel* matrix, bool demo) {
+TetrisGame::TetrisGame(RGBmatrixPanel* matrix,AnalogMultiButton *buttons, bool demo) {
 
 	this->matrix = matrix;
-
+	this->buttons = buttons;
 	matrixColor[Environment::Color::black]=color444(0, 0, 0);
 	matrixColor[Environment::Color::cyan]=color444(0, 15, 15);;
 	matrixColor[Environment::Color::blue]=color444(0, 0, 15);
@@ -58,13 +58,11 @@ void TetrisGame::treatInputSelection() {
 	 while (Serial.available()) {
 	    // get the new byte:
 	    char inChar = (char)Serial.read();
-	    if ( 	(inChar=='A'|| inChar=='a')){
+	    if ((inChar=='A'|| inChar=='a')){
 	    	leveler->substractInitLevel();
-	    } else if ( 	(inChar=='D'|| inChar=='d')){
+	    } else if ((inChar=='D'|| inChar=='d')){
 	    	leveler->addInitLevel();
-
-	    } else if ( 	(inChar=='S'|| inChar=='s')){
-
+	    } else if ((inChar=='S'|| inChar=='s')){
 	    	this->levelSelection=false;
 
 	    }
@@ -228,6 +226,9 @@ const uint8_t* TetrisGame::getDigitBitmap(uint8_t digit) {
 
 Board*& TetrisGame::getBoard()  {
 	return board;
+}
+AnalogMultiButton*& TetrisGame::getButtons()  {
+	return buttons;
 }
 
 Score*& TetrisGame::getScore()  {

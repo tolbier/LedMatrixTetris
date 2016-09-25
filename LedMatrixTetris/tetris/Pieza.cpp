@@ -87,6 +87,20 @@ void Pieza::mueveDerecha(){
 
 void Pieza::treatInput() {
      setDropping(false);
+     AnalogMultiButton* buttons = this->getGame()->getButtons();
+     if (buttons->onPress(3)){
+    	 mueveIzquierda();
+     }
+     if (buttons->onPress(0)){
+    	 mueveDerecha();
+     }
+     if (buttons->isPressed(1)){
+    	 setDropping(true);
+     }
+     if (buttons->onPress(2)){
+    	 giro();
+     }
+
 	 while (Serial.available()) {
 	    // get the new byte:
 	    char inChar = (char)Serial.read();
@@ -97,7 +111,7 @@ void Pieza::treatInput() {
 	    	mueveDerecha();
 	    }
 	    if (inChar=='w' || inChar=='W'){
-	    	if (libreGiro()) giro();
+	    	giro();
 	    }
 	    if (inChar=='s' || inChar=='S'){
 	    	setDropping(true);
@@ -130,7 +144,8 @@ uint8_t Pieza::getNextProfileIdx(){
 	return retorno;
 }
 void Pieza::giro(){
-	setCurrentProfileIdx(getNextProfileIdx());
+	if (libreGiro())
+		setCurrentProfileIdx(getNextProfileIdx());
 }
 void Pieza::drawPrevia() {
 	getGame()->fillRect(PREVIA_LEFT,PREVIA_TOP,4,2,Environment::Color::black);
