@@ -35,8 +35,13 @@ TetrisGame::TetrisGame(RGBmatrixPanel* matrix, bool demo) {
 	this->requestStart=false;
 	levelSelection=!demo;
 
+	cleanSerialBuffer();
 
-
+}
+void TetrisGame::cleanSerialBuffer(){
+	while (Serial.available()){
+		Serial.read();
+	}
 }
 
 TetrisGame::~TetrisGame() {
@@ -81,7 +86,8 @@ void TetrisGame::treatInputDemo() {
 	  }
 }
 void TetrisGame::showGameOver(){
-	  static unsigned long lastMillis=millis();
+	  static unsigned long lastMillis=0;
+	  if (!lastMillis) lastMillis=millis();
 	  fillRect(0,10,matrix->width(),11,Environment::Color::black);
 	  matrix->setTextWrap(false); // Allow text to run off right edge
 	  matrix->setTextSize(1);
@@ -92,9 +98,10 @@ void TetrisGame::showGameOver(){
 	  matrix->print("GAME");
 	  matrix->setCursor(0, 11+offs);
 	  matrix->print("OVER");
+	  unsigned long diff=millis()-lastMillis;
 
-	  if (millis()-lastMillis<4000) return;
-
+	  if (diff<4000) return;
+	  lastMillis=0;
 	  setEndOfGame(true);
 
 }

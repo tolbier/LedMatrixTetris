@@ -62,6 +62,7 @@ private:
 	void showGameOver();
 	void treatInputDemo() ;
 	void treatInputSelection();
+	void cleanSerialBuffer();
 	bool demo;
 	bool levelSelection;
 	bool requestStart;
