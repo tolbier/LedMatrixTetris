@@ -88,16 +88,16 @@ void Pieza::mueveDerecha(){
 void Pieza::treatInput() {
      setDropping(false);
      AnalogMultiButton* buttons = this->getGame()->getButtons();
-     if (buttons->onPress(3)){
+     if (buttons->onPress(Environment::LEFT)){
     	 mueveIzquierda();
      }
-     if (buttons->onPress(0)){
+     if (buttons->onPress(Environment::RIGHT)){
     	 mueveDerecha();
      }
-     if (buttons->isPressed(1)){
+     if (buttons->isPressed(Environment::DOWN)){
     	 setDropping(true);
      }
-     if (buttons->onPress(2)){
+     if (buttons->onPress(Environment::UP)){
     	 giro();
      }
 

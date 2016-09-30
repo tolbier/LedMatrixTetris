@@ -14,6 +14,7 @@ public:
 	Environment();
 	virtual ~Environment();
 	enum  Color {black,cyan,blue,orange,yellow,green,magenta,red,grey,white};
+	enum  Button {LEFT,DOWN,RIGHT,UP};
 
 };
 

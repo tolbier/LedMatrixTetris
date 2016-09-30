@@ -54,6 +54,15 @@ TetrisGame::~TetrisGame() {
 
 }
 void TetrisGame::treatInputSelection() {
+    if (buttons->onPress(Environment::LEFT)){
+    	leveler->substractInitLevel();
+    }
+    if (buttons->onPress(Environment::RIGHT)){
+    	leveler->addInitLevel();
+    }
+    if (buttons->onPress(Environment::DOWN)){
+    	this->levelSelection=false;
+    }
 
 	 while (Serial.available()) {
 	    // get the new byte:
@@ -70,6 +79,12 @@ void TetrisGame::treatInputSelection() {
 	  }
 }
 void TetrisGame::treatInputDemo() {
+    if (buttons->onPress(Environment::LEFT)  ||
+    		buttons->onPress(Environment::RIGHT)  ||
+			buttons->onPress(Environment::UP)  ||
+			buttons->onPress(Environment::DOWN)  ){
+    	this->requestStart = true;
+    }
 
 	 while (Serial.available()) {
 	    // get the new byte:
