@@ -8,7 +8,7 @@
 #ifndef TETRIS_TETRISGAME_H_
 #define TETRIS_TETRISGAME_H_
 #include "Arduino.h"
-#include <Adafruit_GFX.h>   // Core graphics library
+#include <Adafruit_GFX.h>  // Core graphics library
 #include <RGBmatrixPanel.h> // Hardware-specific library
 #include <AnalogMultiButton.h>
 #include "FontTomThumb.h"
