@@ -262,7 +262,7 @@ void Adafruit_GFX::fillRect(int16_t x, int16_t y, int16_t w, int16_t h,
   }
 }
 
-void Adafruit_GFX::fillTetrisGame(uint16_t color) {
+void Adafruit_GFX::fillScreen(uint16_t color) {
   fillRect(0, 0, _width, _height, color);
 }
 
@@ -1008,7 +1008,7 @@ void GFXcanvas1::drawPixel(int16_t x, int16_t y, uint16_t color) {
   }
 }
 
-void GFXcanvas1::fillTetrisGame(uint16_t color) {
+void GFXcanvas1::fillScreen(uint16_t color) {
   if(buffer) {
     uint16_t bytes = ((WIDTH + 7) / 8) * HEIGHT;
     memset(buffer, color ? 0xFF : 0x00, bytes);
@@ -1056,7 +1056,7 @@ void GFXcanvas16::drawPixel(int16_t x, int16_t y, uint16_t color) {
   }
 }
 
-void GFXcanvas16::fillTetrisGame(uint16_t color) {
+void GFXcanvas16::fillScreen(uint16_t color) {
   if(buffer) {
     uint8_t hi = color >> 8, lo = color & 0xFF;
     if(hi == lo) {
