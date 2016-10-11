@@ -179,8 +179,8 @@ void Pieza::stampPieza(){
  	uint8_t height = pgm_read_byte(p++);
 
 
-    uint8_t b;
- 	uint8_t bit;
+    uint8_t b=0;
+ 	uint8_t bit=0;
 
  	for (uint8_t j = 0; j < height; j++) {
  		for (uint8_t i = 0; i < width; i++) {
@@ -221,8 +221,8 @@ bool Pieza::libreXY(int8_t x_offset,int8_t y_offset,const uint8_t* p){
 	uint8_t width = pgm_read_byte(p++);
 	uint8_t height = pgm_read_byte(p++);
 
-	uint8_t b;
-	uint8_t bit;
+	uint8_t b=0;
+	uint8_t bit=0;
 
 	for (uint8_t j = 0; j < height; j++) {
 		for (uint8_t i = 0; i < width; i++) {

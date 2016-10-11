@@ -254,8 +254,8 @@ uint8_t TetrisGame::drawBitmap(int8_t x, int8_t y, const uint8_t *bmp, Environme
 	uint8_t width = pgm_read_byte(bmp);
 	uint8_t height = pgm_read_byte(bmp + 1);
 	const unsigned char *p = bmp + 2;
-	uint8_t b;
-	uint8_t bit;
+	uint8_t b=0;
+	uint8_t bit=0;
 
 	for (uint8_t j = 0; j < height; j++) {
 		for (uint8_t i = 0; i < width; i++) {
