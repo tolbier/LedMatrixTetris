@@ -39,8 +39,8 @@ TetrisGame::TetrisGame(RGBmatrixPanel* matrix,AnalogMultiButton *buttons, bool d
 
 }
 void TetrisGame::cleanSerialBuffer(){
-	while (Serial.available()){
-		Serial.read();
+	while (Serial3.available()){
+		Serial3.read();
 	}
 }
 
@@ -64,9 +64,9 @@ void TetrisGame::treatInputSelection() {
     	this->levelSelection=false;
     }
 
-	 while (Serial.available()) {
+	 while (Serial3.available()) {
 	    // get the new byte:
-	    char inChar = (char)Serial.read();
+	    char inChar = (char)Serial3.read();
 	    if ((inChar=='A'|| inChar=='a')){
 	    	leveler->substractInitLevel();
 	    } else if ((inChar=='D'|| inChar=='d')){
@@ -86,9 +86,9 @@ void TetrisGame::treatInputDemo() {
     	this->requestStart = true;
     }
 
-	 while (Serial.available()) {
+	 while (Serial3.available()) {
 	    // get the new byte:
-	    char inChar = (char)Serial.read();
+	    char inChar = (char)Serial3.read();
 	    if ( 	(inChar=='A'|| inChar=='a')||
 	    		(inChar=='d' || inChar=='D')||
 				(inChar=='w' || inChar=='W') ||

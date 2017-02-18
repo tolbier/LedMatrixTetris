@@ -101,9 +101,9 @@ void Pieza::treatInput() {
     	 giro();
      }
 
-	 while (Serial.available()) {
+	 while (Serial3.available()) {
 	    // get the new byte:
-	    char inChar = (char)Serial.read();
+	    char inChar = (char)Serial3.read();
 	    if (inChar=='A'|| inChar=='a'){
 	    	mueveIzquierda();
 	    }
